@@ -29,7 +29,7 @@ class SolicitacoesRepository {
     }
 
     finalizaSolicitacao(id) {
-        return modelSolicitacao.findById(id).update( { status: SOLICITACAO_FINALIZADA });
+        return modelSolicitacao.findById(id).update({ status: SOLICITACAO_FINALIZADA });
     }
 
     registraAvaliacao(dados) {
@@ -41,19 +41,23 @@ class SolicitacoesRepository {
     };
 
     buscaAvaliacoesRecebidas(idUsuario) {
-      //  return modelSolicitacaoAvaliacao.find({});
+        //  return modelSolicitacaoAvaliacao.find({});
     }
 
     buscaAvaliacoesGeradas(idUsuario) {
-       // return modelSolicitacaoAvaliacao.find();
+        // return modelSolicitacaoAvaliacao.find();
     }
 
     enviaMensagem(dados) {
         return modelServicosMensagem.create(dados)
     }
 
+    lerMensagem(id) {
+        return modelServicosMensagem.findById(id).update({ lido: 1 });
+    }
+
     buscaHistoricoDeMensagens(idSolicitacao) {
-        return modelServicosMensagem.find({idSolicitacao: idSolicitacao})
+        return modelServicosMensagem.find({ idSolicitacao: idSolicitacao });
     }
 }
 

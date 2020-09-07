@@ -33,12 +33,10 @@ class UsuarioController {
         return res.status(200).json({ 'result': cadastro });
     }
 
-
     async editaEndereco(req, res) {
         let cadastro = await this.service.editaEndereco(req.params.id, req.params.enderecoId, req.body)
         return res.status(200).json({ 'result': cadastro });
     }
-
 
     async excluiEndereco(req, res) {
         return await this.service.deletaEndereco(req.params.enderecoId)
@@ -51,15 +49,18 @@ class UsuarioController {
         return res.status(200).json({ 'result': cadastro });
     }
 
-
     async bloqueiaUsuario(req, res) {
         let cadastro = await this.service.bloqueiaCadastro(req.params.id, req.body);
         return res.status(200).json({ 'result': cadastro });
-     }
+    }
 
-    async deletaBloqueio(req, res) { 
+    async deletaBloqueio(req, res) {
         let cadastro = await this.service.removeBloqueioCadastro(req.params.blockid);
         return res.status(200).json({ 'result': cadastro });
+    }
+
+    privacidade(req, res) {
+        return res.status(200).json({ 'result': this.service.politicaDePrivacidade() });
     }
 }
 

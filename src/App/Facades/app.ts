@@ -32,6 +32,7 @@ class App {
     routes() {
 
         this.app.route('/').get((req, res) => res.status(200).json({ 'message': 'Hello world!' }));
+        this.app.route('/privacidade').get((req, res) => this.usuarios.privacidade(req, res));
         this.app.route('/servico').get((req, res) => this.servicos.buscaServicos(req, res));
         this.app.route('/servico').post((req, res) => this.servicos.criaServico(req, res));
         this.app.route('/novo-cadastro').post((req, res) => this.usuarios.criaUsuario(req, res));

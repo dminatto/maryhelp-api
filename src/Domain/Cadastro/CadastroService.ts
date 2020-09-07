@@ -1,7 +1,8 @@
-import solicitacoesRepository from '../../Infrastructure/Repositorys/SolicitacoesRepository';
+
 import usuarioRepository from '../../Infrastructure/Repositorys/UsuarioRepository';
 import notificacaoService from './NotificacoesService';
 import servicoService from '../Servicos/ServicoService';
+import privacidadeFactory from '../../Infrastructure/Factories/TermosUsoFactory'
 
 class CadastroService {
 
@@ -44,9 +45,7 @@ class CadastroService {
 
     private async cadastro(id) {
         return this.usuarioRepository.detalhaUsuario(id)
-            .then(cadastro => {
-                return cadastro;
-            })
+            .then(cadastro => { return cadastro; })
             .catch(err => { return err });
     }
 
@@ -174,6 +173,17 @@ class CadastroService {
             .catch(err => { return err });
 
 
+    }
+
+
+    politicaDePrivacidade() { 
+
+        let privacidade = new Array;
+
+        privacidade.push(privacidadeFactory.termosDeUso())
+        privacidade.push(privacidadeFactory.politicaDePrivacidade())
+
+        return privacidade;
     }
 }
 
