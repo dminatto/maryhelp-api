@@ -1,0 +1,147 @@
+
+/*POST */
+
+
+{
+    "cadastro" : {
+        "nome": "Gabriela",
+        "sobrenome": "Silva",
+        "dataNascimento": "11/10/1990",
+        "usuario": "gabis",
+        "senha" : 1234,
+        "telefone" : "000000000",
+        "email": "gabi.s@email.com",
+        "temfilhos": 0
+    },
+    "endereco" : {
+        "0" : {
+            "tipoEndereco": "comercial",
+            "cep": 000000000,
+            "uf": "SC",
+            "cidade" : "Cidade",
+            "bairro" : "Centro",
+            "endereco": "rua das laranjeiras",
+            "numero" : 20
+        }
+    },
+    "servicosOferecidos" : {
+        "0" : {
+            "tipoAtendimento" : 1,
+            "aceitaPermuta" : 0,
+            "valor": 60.00
+        },
+        "0" : {
+            "tipoAtendimento" : 2,
+            "aceitaPermuta" : 1,
+            "valor": 00.00
+        }
+    }
+}
+
+
+/*GET*/
+
+{
+    "cadastro" : {
+        "_id": "yyyyyyyyyyyyyyyyyyyyyyyyy",
+        "nome": "Gabriela",
+        "sobrenome": "Silva",
+        "dataNascimento": "11/10/1990",
+        "usuario": "gabis",
+        "telefone" : "000000000",
+        "email": "gabi.s@email.com",
+        "temfilhos": 0
+    },
+    "endereco" : {
+        "0" : {
+            "_id": "aaaaaaaaaaaaaaaaaaaaaaaa",
+            "tipoEndereco": "comercial",
+            "cep": 000000000,
+            "uf": "SC",
+            "cidade" : "Cidade",
+            "bairro" : "Centro",
+            "endereco": "rua das laranjeiras",
+            "numero" : 20
+        }
+    },
+    "servicosOferecidos" : {
+        "0" : {
+            "_id" : "xxxxxxxxxxxxxxxxxx",
+            "nomeServico" : "Atendimento Psicologico",
+            "tipoAtendimento" : "Presencial",
+            "aceitaPermuta" : 0,
+            "valor": 60.00
+        },
+        "0" : {
+            "_id" : "xxxxxxxxxxxxxxxxxx",
+            "nomeServico" : "Coaching de carreira",
+            "tipoAtendimento" : "Online",
+            "aceitaPermuta" : 1,
+            "valor": 00.00
+        }
+    },
+    "usuariosBloqueados" : {
+        "0" : {
+            "_id": "bbbbbbbbbbbbbbbbbb",
+            "codUsuario" : "xxxxxxxxxxxxxxxx",
+            "nomeUsuario" : "Fulana da Silva",
+            "foto": "../src/zzzzzzzzzzzzzzzz/perfil/foto.png",
+            "dataBloqueio" : "21/01/2020"
+        }
+    },
+    "notificacoes" : {
+        "0" : {
+            "_id": "cccccccccccccc",
+            "descricao": "Fulana da silva enviou uma nova mensagem",
+            "lido": 0
+        },
+        "1": {
+            "_id": "dddddddddddddddd",
+            "descricao": "Você gostou do servico de 'Passeio com cães' realizado por Maria da Silva? Escreva já sua avaliação!",
+            "lido": 1
+        },
+        "2": {
+            "_id": "dddddddddddddddd",
+            "descricao": "O servico de 'Passeio com cães' foi marcado como  concluido por Maria da Silva",
+            "lido": 1
+        },
+    },
+    "avaliacoesFeitas" :{
+        "0" : {
+            "_id": "cccccccccccccc",
+            "codUsuario" : "kkkkkkkkkkkkkkkkkk",
+            "nomeUsuario" : "Maria da Silva",
+            "servicoContratado" : "Passeio com cães",
+            "foto": "../src/zzzzzzzzzzzzzzzz/perfil/foto.png",
+            "descricao": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ",
+            "lido": 0
+        },
+    },
+    "avaliacoesRecebidas" :{
+        "0" : {
+            "_id": "cccccccccccccc",
+            "codUsuario" : "xxxxxxxxxxxxxxxx",
+            "nomeUsuario" : "Fulana da Silva",
+            "servicoContratado" : "Coaching de carreira",
+            "foto": "../src/zzzzzzzzzzzzzzzz/perfil/foto.png",
+            "descricao": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ",
+            "lido": 0
+        },
+        "1": {
+            "_id": "dddddddddddddddd",
+            "codUsuario" : "xxxxxxxxxxxxxxxx",
+            "nomeUsuario" : "Luiza Nunes",
+            "servicoContratado" : "Atendimento Psicologico",
+            "foto": "../src/zzzzzzzzzzzzzzzz/perfil/foto.png",
+            "descricao": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In dapibus sapien et metus ornare pretium. Sed efficitur et odio vitae imperdiet. Mauris quis bibendum eros. ",
+        },
+        "2": {
+            "_id": "hhhhhhhhhhhhhh",
+            "codUsuario" : "xxxxxxxxxxxxxxxx",
+            "nomeUsuario" : "Lara Lopes",
+            "servicoContratado" : "Atendimento Psicologico",
+            "foto": "../src/zzzzzzzzzzzzzzzz/perfil/foto.png",
+            "descricao": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In dapibus sapien et metus ornare pretium",
+        },
+    },
+}
