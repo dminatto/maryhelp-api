@@ -29,6 +29,14 @@ class App {
         this.app.use(bodyParser.urlencoded({ extended: true }));
     }
 
+    dataBaseConnection() {
+        this.db.createConnection();
+      }
+    
+      closeDataBaseConnection(message, callback) {
+        this.db.closeConnection(message, () => callback());
+      }
+
     routes() {
 
         this.app.route('/').get((req, res) => res.status(200).json({ 'message': 'Hello world!' }));
