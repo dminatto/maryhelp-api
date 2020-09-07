@@ -131,7 +131,7 @@ var UsuarioController = /** @class */ (function () {
                     case 0: return [4 /*yield*/, this.notificacao.leNotificacao(req.params.notificacaoId)];
                     case 1:
                         cadastro = _a.sent();
-                        return [2 /*return*/, res.status(200).json({ 'result': cadastro })];
+                        return [2 /*return*/, res.status(200).json({ 'result': "Notificação lida com sucesso!" })];
                 }
             });
         });

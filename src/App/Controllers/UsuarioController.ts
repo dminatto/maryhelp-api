@@ -46,7 +46,7 @@ class UsuarioController {
 
     async marcarNotificacaoComoLida(req, res) {
         let cadastro = await this.notificacao.leNotificacao(req.params.notificacaoId);
-        return res.status(200).json({ 'result': cadastro });
+        return res.status(200).json({ 'result': "Notificação lida com sucesso!" });
     }
 
     async bloqueiaUsuario(req, res) {

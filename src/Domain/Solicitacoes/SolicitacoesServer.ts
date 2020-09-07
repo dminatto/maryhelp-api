@@ -1,15 +1,34 @@
 import solicitacoesRepository from '../../Infrastructure/Repositorys/SolicitacoesRepository';
+import usuarioService from '../Cadastro/CadastroService';
+import servicoService from '../Servicos/ServicoService';
+import { count } from 'console';
+
+const SOLICITACAO_CANCELADA = 0;
+const SOLICITACAO_ABERTA = 1;
+const SOLICITACAO_EM_ANDAMENTO = 2;
+const SOLICITACAO_FINALIZADA = 3;
 
 class SolicitacoesController {
 
-    private repository;
+    private repository: solicitacoesRepository;
+    private usuarioService: usuarioService;
+    private servicoService: servicoService;
 
     constructor() {
         this.repository = new solicitacoesRepository();
+        this.usuarioService = new usuarioService();
+        this.servicoService = new servicoService();
     }
 
-    async criaSolicitacao(dados) {
-        return await this.repository.criaSolicitacao(dados)
+    async criaSolicitacao(idUsuario, dados) {
+
+        let request = {
+            codSolicitante: idUsuario,
+            codSolicitado: dados.codSolicitado,
+            codServico: dados.codServico
+        }
+
+        return await this.repository.criaSolicitacao(request)
             .then(solicitacao => { return solicitacao })
             .catch(err => { return err });
     }
@@ -32,15 +51,14 @@ class SolicitacoesController {
 
     async atribuiSolicitacao(idSolicitacao, data) {
         let request = {
-            codSolicitante: data.idSolicitante,
             codSolicitado: data.idSolicitado,
-            status: this.repository.SOLICITACAO_EM_ANDAMENTO
+            status: SOLICITACAO_EM_ANDAMENTO
         }
 
         return await this.repository.editaSolicitacao(idSolicitacao, request)
             .then(solicitacao => {
                 //todo: enviar uma notificacao
-                return solicitacao
+                return "Solicitacao atribuida com sucesso!"
             })
             .catch(err => { return err });
     }
@@ -60,16 +78,19 @@ class SolicitacoesController {
         //todo: tratar se a solicitacao está aberta e não tem solicitante
 
         let request = {
-            status: this.repository.SOLICITACAO_CANCELADA,
+            status: SOLICITACAO_CANCELADA,
             ativo: 0
         }
 
         return await this.repository.editaSolicitacao(idSolicitacao, request)
-            .then(solicitacao => { return solicitacao })
+            .then(solicitacao => {
+                //todo: enviar uma notificacao
+                return "Solicitacao cancelada com sucesso!"
+            })
             .catch(err => { return err });
     }
 
-    async buscaSolicitacoesDoUsuario(idUsuario) { 
+    async buscaSolicitacoesDoUsuario(idUsuario) {
 
 
 
@@ -79,6 +100,49 @@ class SolicitacoesController {
             canceladas: [],
             finalizadas: []
         }
+    }
+
+    async buscaTodasSolicitacoesEmAberto() {
+
+        let solicitacoes = await this.repository.buscaSolicitacoesEmAberto()
+            .then(solicitacao => { return solicitacao })
+            .catch(err => { return err });
+
+        var listaSolicitacoes = new Array;
+
+        console.log(solicitacoes);
+
+        for (let key in solicitacoes) {
+            if (this.isEmpty(solicitacoes[key].codSolicitante) || this.isEmpty(solicitacoes[key].codServico)) {
+                continue;
+            }
+
+            listaSolicitacoes.push(await this.detalhaSolicitacao(solicitacoes[key]));
+        }
+
+        return listaSolicitacoes;
+    }
+
+    private async detalhaSolicitacao(solicitacao) {
+
+        let user = await this.usuarioService.cadastro(solicitacao.codSolicitante);
+
+        let servico = await this.servicoService.buscarServico(solicitacao.codServico).
+            then(servico => {
+                console.log('retono do servico')
+                console.log(servico)
+                return servico;
+            }).catch(err => { return err });
+
+        return {
+            _id: solicitacao.id,
+            codSolicitante: solicitacao.codSolicitante,
+            nomeCompleto: user.nome + " " + user.sobrenome,
+            foto: user.foto,
+            codServico: solicitacao.codServico,
+            nomeServico: servico.nome,
+            dataSolicitacao: solicitacao.dataSolicitacao
+        };
     }
 
     async buscaAvaliacoesSolicitacoesFeitas(idUsuario) { }
@@ -93,7 +157,7 @@ class SolicitacoesController {
             mensagem: dados.mensagem
         };
 
-        return await this.repository.enviaMensagem(idSolicitacao, request)
+        return await this.repository.enviaMensagem(request)
             .then(mensagem => { return mensagem })
             .catch(err => { return err });
     }
@@ -114,6 +178,15 @@ class SolicitacoesController {
 
         //todo: pegar a mensagem mais recente de cada solicitacao em aberto e listar;
 
+    }
+
+    isEmpty(obj) {
+        for (var prop in obj) {
+            if (obj.hasOwnProperty(prop))
+                return false;
+        }
+
+        return true;
     }
 
 }

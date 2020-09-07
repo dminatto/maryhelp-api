@@ -9,19 +9,30 @@ const SOLICITACAO_FINALIZADA = 3;
 
 class SolicitacoesRepository {
 
-    buscaSolicitacoes() {
-        //SOLICITACAO_EM_ANDAMENTO, SOLICITACAO_FINALIZADA
-
+    buscaSolicitacoesSolicitante(idUsuario, statusSolicitacao) {
+        
+        return modelSolicitacao.find({ status:statusSolicitacao})
+                .where({codSolicitante: idUsuario});
     }
 
-    buscaSolicitacoesEmAberto() { }
+    buscaSolicitacoesSolicitado(idUsuario, statusSolicitacao) {
+
+        return modelSolicitacao.find({ status:statusSolicitacao})
+                .where({codSolicitado: idUsuario});
+    }
+
+    buscaSolicitacoesEmAberto() {
+
+        return modelSolicitacao.find({ status: SOLICITACAO_ABERTA })
+            .where({ ativo: 1 })
+    }
 
     criaSolicitacao(dados) {
         return modelSolicitacao.create(dados);
     }
 
     editaSolicitacao(id, dados) {
-        return modelSolicitacao.findOneAndUpdate(id, dados);
+        return modelSolicitacao.findById(id).update(dados);
     }
 
     cancelaSolicitacao(id) {

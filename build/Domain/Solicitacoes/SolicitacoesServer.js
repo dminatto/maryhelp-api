@@ -37,17 +37,32 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var SolicitacoesRepository_1 = require("../../Infrastructure/Repositorys/SolicitacoesRepository");
+var CadastroService_1 = require("../Cadastro/CadastroService");
+var ServicoService_1 = require("../Servicos/ServicoService");
+var SOLICITACAO_CANCELADA = 0;
+var SOLICITACAO_ABERTA = 1;
+var SOLICITACAO_EM_ANDAMENTO = 2;
+var SOLICITACAO_FINALIZADA = 3;
 var SolicitacoesController = /** @class */ (function () {
     function SolicitacoesController() {
         this.repository = new SolicitacoesRepository_1.default();
+        this.usuarioService = new CadastroService_1.default();
+        this.servicoService = new ServicoService_1.default();
     }
-    SolicitacoesController.prototype.criaSolicitacao = function (dados) {
+    SolicitacoesController.prototype.criaSolicitacao = function (idUsuario, dados) {
         return __awaiter(this, void 0, void 0, function () {
+            var request;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.repository.criaSolicitacao(dados)
-                            .then(function (solicitacao) { return solicitacao; })
-                            .catch(function (err) { return err; })];
+                    case 0:
+                        request = {
+                            codSolicitante: idUsuario,
+                            codSolicitado: dados.codSolicitado,
+                            codServico: dados.codServico
+                        };
+                        return [4 /*yield*/, this.repository.criaSolicitacao(request)
+                                .then(function (solicitacao) { return solicitacao; })
+                                .catch(function (err) { return err; })];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });
@@ -80,14 +95,13 @@ var SolicitacoesController = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         request = {
-                            codSolicitante: data.idSolicitante,
                             codSolicitado: data.idSolicitado,
-                            status: this.repository.SOLICITACAO_EM_ANDAMENTO
+                            status: SOLICITACAO_EM_ANDAMENTO
                         };
                         return [4 /*yield*/, this.repository.editaSolicitacao(idSolicitacao, request)
                                 .then(function (solicitacao) {
                                 //todo: enviar uma notificacao
-                                return solicitacao;
+                                return "Solicitacao atribuida com sucesso!";
                             })
                                 .catch(function (err) { return err; })];
                     case 1: return [2 /*return*/, _a.sent()];
@@ -117,11 +131,14 @@ var SolicitacoesController = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         request = {
-                            status: this.repository.SOLICITACAO_CANCELADA,
+                            status: SOLICITACAO_CANCELADA,
                             ativo: 0
                         };
                         return [4 /*yield*/, this.repository.editaSolicitacao(idSolicitacao, request)
-                                .then(function (solicitacao) { return solicitacao; })
+                                .then(function (solicitacao) {
+                                //todo: enviar uma notificacao
+                                return "Solicitacao cancelada com sucesso!";
+                            })
                                 .catch(function (err) { return err; })];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
@@ -137,6 +154,71 @@ var SolicitacoesController = /** @class */ (function () {
                         canceladas: [],
                         finalizadas: []
                     }];
+            });
+        });
+    };
+    SolicitacoesController.prototype.buscaTodasSolicitacoesEmAberto = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var solicitacoes, listaSolicitacoes, _a, _b, _i, key, _c, _d;
+            return __generator(this, function (_e) {
+                switch (_e.label) {
+                    case 0: return [4 /*yield*/, this.repository.buscaSolicitacoesEmAberto()
+                            .then(function (solicitacao) { return solicitacao; })
+                            .catch(function (err) { return err; })];
+                    case 1:
+                        solicitacoes = _e.sent();
+                        listaSolicitacoes = new Array;
+                        console.log(solicitacoes);
+                        _a = [];
+                        for (_b in solicitacoes)
+                            _a.push(_b);
+                        _i = 0;
+                        _e.label = 2;
+                    case 2:
+                        if (!(_i < _a.length)) return [3 /*break*/, 5];
+                        key = _a[_i];
+                        if (this.isEmpty(solicitacoes[key].codSolicitante) || this.isEmpty(solicitacoes[key].codServico)) {
+                            return [3 /*break*/, 4];
+                        }
+                        _d = (_c = listaSolicitacoes).push;
+                        return [4 /*yield*/, this.detalhaSolicitacao(solicitacoes[key])];
+                    case 3:
+                        _d.apply(_c, [_e.sent()]);
+                        _e.label = 4;
+                    case 4:
+                        _i++;
+                        return [3 /*break*/, 2];
+                    case 5: return [2 /*return*/, listaSolicitacoes];
+                }
+            });
+        });
+    };
+    SolicitacoesController.prototype.detalhaSolicitacao = function (solicitacao) {
+        return __awaiter(this, void 0, void 0, function () {
+            var user, servico;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.usuarioService.cadastro(solicitacao.codSolicitante)];
+                    case 1:
+                        user = _a.sent();
+                        return [4 /*yield*/, this.servicoService.buscarServico(solicitacao.codServico).
+                                then(function (servico) {
+                                console.log('retono do servico');
+                                console.log(servico);
+                                return servico;
+                            }).catch(function (err) { return err; })];
+                    case 2:
+                        servico = _a.sent();
+                        return [2 /*return*/, {
+                                _id: solicitacao.id,
+                                codSolicitante: solicitacao.codSolicitante,
+                                nomeCompleto: user.nome + " " + user.sobrenome,
+                                foto: user.foto,
+                                codServico: solicitacao.codServico,
+                                nomeServico: servico.nome,
+                                dataSolicitacao: solicitacao.dataSolicitacao
+                            }];
+                }
             });
         });
     };
@@ -161,7 +243,7 @@ var SolicitacoesController = /** @class */ (function () {
                             codUsuario: idUsuario,
                             mensagem: dados.mensagem
                         };
-                        return [4 /*yield*/, this.repository.enviaMensagem(idSolicitacao, request)
+                        return [4 /*yield*/, this.repository.enviaMensagem(request)
                                 .then(function (mensagem) { return mensagem; })
                                 .catch(function (err) { return err; })];
                     case 1: return [2 /*return*/, _a.sent()];
@@ -199,6 +281,13 @@ var SolicitacoesController = /** @class */ (function () {
                 return [2 /*return*/];
             });
         });
+    };
+    SolicitacoesController.prototype.isEmpty = function (obj) {
+        for (var prop in obj) {
+            if (obj.hasOwnProperty(prop))
+                return false;
+        }
+        return true;
     };
     return SolicitacoesController;
 }());

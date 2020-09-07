@@ -43,7 +43,7 @@ class CadastroService {
 
     }
 
-    private async cadastro(id) {
+    async cadastro(id) {
         return this.usuarioRepository.detalhaUsuario(id)
             .then(cadastro => { return cadastro; })
             .catch(err => { return err });

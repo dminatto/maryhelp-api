@@ -6,27 +6,241 @@ class SolicitacaoRoute {
 
     private app: express.Application;
 
-
     constructor(app) {
         this.app = app;
         this.listaRotas();
     }
 
+    listaRotas() {
 
-    listaRotas() { 
+        /**
+         * @api {post} /solicitacao Busca todas as solicitações em aberto
+         * @apiVersion 1.0.0
+         * @apiName buscaSolicitacoesEmAberto
+         * @apiGroup Solicitação
+         *
+         * @apiParam (parameters) {String} id Solicitacao Id
+         *
+         * @apiSuccess (200) {String} data  Ok
+         * @apiSuccessExample Success-Response:
+         * {
+         *   "result": [
+         *       {
+         *       "_id": "5f56a00b9c1547586b69b917",
+         *       "codSolicitante": [
+         *           "5f55a5e825a0cfbdfa30b078"
+         *       ],
+         *       "nomeCompleto": "Maria Mercedes",
+         *       "codServico": [
+         *           "5f556a38363c4a936c0fd74c"
+         *       ],
+         *       "dataSolicitacao": "2020-09-07T21:03:07.464Z"
+         *       }
+         *   ]}
+         *
+         * @apiError UserNotFound The id of the User was not found.
+         * @apiErrorExample Error-Response:
+         *     HTTP/1.1 404 Not Found
+         *     {
+         *       "error": "UseNortFound"
+         *     }
+         */
+        this.app.route('/solicitacao').get((req, res) => Controller.buscaSolicitacoesEmAberto(req, res));
+
+        /**
+        * @api {get} usuario/:id/solicitacoes Busca solicitação
+        * @apiVersion 1.0.0
+        * @apiName buscaSolicitacoes
+        * @apiGroup Solicitação
+        * @apiSuccessExample Success-Response:
+        * {
+        *   "result": [{
+        *        "_id": "5f56a00b9c1547586b69b917",
+        *        "codSolicitante": [
+        *            "5f55a5e825a0cfbdfa30b078"
+        *        ],
+        *        "nomeCompleto": "Maria Mercedes",
+        *        "codServico": [
+        *            "5f556a38363c4a936c0fd74c"
+        *        ],
+        *        "dataSolicitacao": "2020-09-07T21:03:07.464Z"
+        *    },
+        * ]}
+        * @apiError error
+        * @apiErrorExample Error-Response:
+        *     HTTP/1.1 404 Not Found
+        *     {
+        *       "error": "UseNortFound"
+        *     }
+        */
+        this.app.route('/usuario/:id/solicitacoes').get((req, res) => Controller.buscaSolicitacoes(req, res));
 
 
-        this.app.route('/solicitacao/:id').get((req, res) => Controller.buscaSolicitacoes(req, res));
+
+         /**
+        * @api {post} usuario/:id/solicitacoes Cadastra solicitação
+        * @apiVersion 1.0.0
+        * @apiName criaSolicitacao
+        * @apiGroup Solicitação
+        *
+        * @apiParam (parameters) {String} id id do usuario
+        * @apiParam (parameters) {String} codSolicitado Código do serviço
+        * @apiParam (parameters) {String} codServico Código do serviço
+        * 
+        * @apiParamExample {json} Request-Example:
+        *     {
+        *       "codSolicitado": "5f568faa13f5824934eadf1a",
+	            "codServico": "5f556a38363c4a936c0fd74c"
+        *     }
+        *
+        * @apiSuccess (200) {String} data  Ok
+        * @apiSuccessExample Success-Response:
+        * {
+        *  "result": {
+        *   "codSolicitante": [
+        *       "5f55a5e825a0cfbdfa30b078"
+        *       ],
+        *       "codSolicitado": [
+        *       "5f568faa13f5824934eadf1a"
+        *       ],
+        *       "codServico": [
+        *       "5f556a38363c4a936c0fd74c"
+        *       ],
+        *       "status": 1,
+        *       "ativo": true,
+        *       "_id": "5f56a00b9c1547586b69b917",
+        *       "dataSolicitacao": "2020-09-07T21:03:07.464Z",
+        *       "__v": 0
+        *  ]}
+        * @apiError error
+        * @apiErrorExample Error-Response:
+        *     HTTP/1.1 404 Not Found
+        *     {
+        *       "error": "UseNortFound"
+        *     }
+        */
         this.app.route('/usuario/:id/solicitacoes').post((req, res) => Controller.criaSolicitacao(req, res));
-        
+
+        /**
+        * @api {put} solicitacao/:id/atribuir Atribui solicitação para usuario
+        * @apiVersion 1.0.0
+        * @apiName atribuiSolicitacaoParaUsuario
+        * @apiGroup Solicitação
+        *
+        * @apiParam (parameters) {String} id id solicitação
+        * * @apiParam (parameters) {String} idSolicitado usuario que vai atender a solicitação
+        * @apiParamExample {json} Request-Example:
+        * {
+        *   "idSolicitado" : "5f55a5e825a0cfbdfa30b078"
+        * }        * 
+        * @apiSuccess (200) {String} message  Ok
+        * @apiSuccessExample Success-Response:
+        * {
+        *   "result": "Solicitação atribuida com sucesso!"
+        * }
+        * @apiError error
+        * @apiErrorExample Error-Response:
+        *     HTTP/1.1 404 Not Found
+        *     {
+        *       "error": "UseNortFound"
+        *     }
+        */
         this.app.route('/solicitacao/:id/atribuir').put((req, res) => Controller.atribuiSolicitacaoParaUsuario(req, res));
+
+         /**
+        * @api {get} solicitacao/:id/finalizar Finaliza solicitação
+        * @apiVersion 1.0.0
+        * @apiName finalizacaoSolicitacao
+        * @apiGroup Solicitação
+        *
+        * @apiParam (parameters) {String} id id solicitação
+        * @apiSuccess (200) {String} message  Ok
+        * @apiSuccessExample Success-Response:
+        * {
+        *   "result": "Solicitação finalizada com sucesso"
+        * }
+        * @apiError error
+        * @apiErrorExample Error-Response:
+        *     HTTP/1.1 404 Not Found
+        *     {
+        *       "error": "UseNortFound"
+        *     }
+        */
         this.app.route('/solicitacao/:id/finalizar').get((req, res) => Controller.finalizacaoSolicitacao(req, res));
+
+        /**
+        * @api {get} solicitacao/:id/finalizar Cancela solicitação
+        * @apiVersion 1.0.0
+        * @apiName cancelaSolicitacao
+        * @apiGroup Solicitação
+        *
+        * @apiParam (parameters) {String} id id solicitação
+        * @apiSuccess (200) {String} message  Ok
+        * @apiSuccessExample Success-Response:
+        * {
+        *   "result": "Solicitação cancelada com sucesso"
+        * }
+        * @apiError error
+        * @apiErrorExample Error-Response:
+        *     HTTP/1.1 404 Not Found
+        *     {
+        *       "error": "UseNortFound"
+        *     }
+        */
         this.app.route('/solicitacao/:id/cancelar').get((req, res) => Controller.cancelaSolicitacao(req, res));
 
-        this.app.route('/solicitacao/:id/chat').get((req, res) => Controller.recuperaHistoricoDoChat(req, res));
-        this.app.route('/solicitacao/:id/chat').post((req, res) => Controller.enviaMensagem(req, res));
-        this.app.route('/solicitacao/:id/chat/:id/visualizar').get((req, res) => Controller.marcaMensagemComoLida(req, res));
 
+        this.app.route('/solicitacao/:id/chat').get((req, res) => Controller.recuperaHistoricoDoChat(req, res));
+
+
+        this.app.route('/solicitacao/:id/chat').post((req, res) => Controller.enviaMensagem(req, res));
+
+        /**
+        * @api {get}so licitacao/:id/chat/:idMensagem/visualizar Marca mensagem como lida
+        * @apiVersion 1.0.0
+        * @apiName marcaMensagemComoLida
+        * @apiGroup Usuario - Notificação
+        *
+        * @apiParam (parameters) {String} id codigo do usuario
+        * @apiParam (parameters) {String} idMensagem codigo da mensagem
+        * 
+        * @apiSuccess (200) {String} message  Ok
+        * @apiSuccessExample Success-Response:
+        * {
+        *   result": "Serviço lida!
+        * }
+        * @apiError error
+        * @apiErrorExample Error-Response:
+        *     HTTP/1.1 404 Not Found
+        *     {
+        *       "error": "UseNortFound"
+        *     }
+        */
+        this.app.route('/solicitacao/:id/chat/:idMensagem/visualizar').get((req, res) => Controller.marcaMensagemComoLida(req, res));
+
+
+        /*
+        rota monta-feed
+
+
+        /p/ escolher
+demonstra-interesse
+
+lista solicitacoes da pessoa
+tabela de interesse e detalha usuario
+
+        
+        p/ solicitacoes 
+        monta feed
+        id usuario
+        servicos do usuario
+        select * from solicitacoes em aberto
+        
+        rota demonstra-interesse
+        registra o interesse
+
+
+        */
     }
 }
 

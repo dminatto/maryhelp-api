@@ -8,7 +8,6 @@ class NotificacoesService {
         this.repository = new usuarioRepository();
     }
 
-
     async criaNotificacaoDeBoasVindas(idUsuario) {
         this.repository.criaNotificacao({
             codUsuario: idUsuario,

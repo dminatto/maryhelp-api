@@ -45,7 +45,11 @@ var ServicosRepository = /** @class */ (function () {
         return Servicos_1.default.find({});
     };
     ServicosRepository.prototype.buscaServico = function (id) {
-        return Servicos_1.default.findById(id);
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, Servicos_1.default.findById(id)];
+            });
+        });
     };
     ServicosRepository.prototype.criaCadastroDeServicos = function (dados) {
         return __awaiter(this, void 0, void 0, function () {

@@ -10,9 +10,9 @@ const SolicitacoesSchema = new mongoose.Schema({
     codServico: [{
         type: mongoose.Schema.Types.ObjectId, ref: 'Servico'
     }],
-    dataSolicitacao: {type: Date, default:Date.now},
-    status: {type: Number},
-    ativo: {type: Boolean}
+    dataSolicitacao: { type: Date, default: Date.now },
+    status: { type: Number, default: 1 },
+    ativo: { type: Boolean, default: 1 }
 });
 
 export default mongoose.model('Solicitacoes', SolicitacoesSchema);

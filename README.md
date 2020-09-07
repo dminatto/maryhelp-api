@@ -1,3 +1,5 @@
+# MaryHelp - API
+
 
 ## Getting started
 
@@ -9,7 +11,7 @@
 ## Developing
 
 ```
-git clone https://annacretelli@dev.azure.com/annacretelli/Desafio%20Sebrae/_git/Desafio%20Sebrae
+git clone https://github.com/dminatto/maryhelp-api.git
 ```
 ```
 cd api
@@ -17,8 +19,13 @@ cd api
 ```
 npm i
 ```
+
+```
+npm dev
+```
+
 ## Building
 
 ```
-npm start
+npm build
 ```

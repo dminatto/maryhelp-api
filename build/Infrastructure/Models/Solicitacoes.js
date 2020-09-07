@@ -12,7 +12,7 @@ var SolicitacoesSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId, ref: 'Servico'
         }],
     dataSolicitacao: { type: Date, default: Date.now },
-    status: { type: Number },
-    ativo: { type: Boolean }
+    status: { type: Number, default: 1 },
+    ativo: { type: Boolean, default: 1 }
 });
 exports.default = mongoose.model('Solicitacoes', SolicitacoesSchema);

@@ -10,15 +10,23 @@ var SOLICITACAO_FINALIZADA = 3;
 var SolicitacoesRepository = /** @class */ (function () {
     function SolicitacoesRepository() {
     }
-    SolicitacoesRepository.prototype.buscaSolicitacoes = function () {
-        //SOLICITACAO_EM_ANDAMENTO, SOLICITACAO_FINALIZADA
+    SolicitacoesRepository.prototype.buscaSolicitacoesSolicitante = function (idUsuario, statusSolicitacao) {
+        return Solicitacoes_1.default.find({ status: statusSolicitacao })
+            .where({ codSolicitante: idUsuario });
     };
-    SolicitacoesRepository.prototype.buscaSolicitacoesEmAberto = function () { };
+    SolicitacoesRepository.prototype.buscaSolicitacoesSolicitado = function (idUsuario, statusSolicitacao) {
+        return Solicitacoes_1.default.find({ status: statusSolicitacao })
+            .where({ codSolicitado: idUsuario });
+    };
+    SolicitacoesRepository.prototype.buscaSolicitacoesEmAberto = function () {
+        return Solicitacoes_1.default.find({ status: SOLICITACAO_ABERTA })
+            .where({ ativo: 1 });
+    };
     SolicitacoesRepository.prototype.criaSolicitacao = function (dados) {
         return Solicitacoes_1.default.create(dados);
     };
     SolicitacoesRepository.prototype.editaSolicitacao = function (id, dados) {
-        return Solicitacoes_1.default.findOneAndUpdate(id, dados);
+        return Solicitacoes_1.default.findById(id).update(dados);
     };
     SolicitacoesRepository.prototype.cancelaSolicitacao = function (id) {
         return Solicitacoes_1.default.findById(id).update({ status: SOLICITACAO_CANCELADA });

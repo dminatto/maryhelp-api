@@ -7,7 +7,7 @@ class ServicosRepository {
         return model.find({});
     }
 
-    buscaServico(id){
+    async buscaServico(id){
         return model.findById(id);
     }
 

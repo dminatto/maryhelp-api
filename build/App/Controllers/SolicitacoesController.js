@@ -53,14 +53,28 @@ var SolicitacoesController = /** @class */ (function () {
             });
         });
     };
-    SolicitacoesController.prototype.criaSolicitacao = function (req, res) {
+    SolicitacoesController.prototype.buscaSolicitacoesEmAberto = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
+            var solicitacoes;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.service.criaSolicitacao(req.body)
-                            .then(function (solicitacao) { return res.status(200).json({ 'result': solicitacao }); })
-                            .catch(function (err) { return res.status(400).json({ 'result': err }); })];
-                    case 1: return [2 /*return*/, _a.sent()];
+                    case 0: return [4 /*yield*/, this.service.buscaTodasSolicitacoesEmAberto(req.params.id)];
+                    case 1:
+                        solicitacoes = _a.sent();
+                        return [2 /*return*/, res.status(200).json({ 'result': solicitacoes })];
+                }
+            });
+        });
+    };
+    SolicitacoesController.prototype.criaSolicitacao = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var solicitacao;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.service.criaSolicitacao(req.params.id, req.body)];
+                    case 1:
+                        solicitacao = _a.sent();
+                        return [2 /*return*/, res.status(200).json({ 'result': solicitacao })];
                 }
             });
         });
@@ -70,7 +84,7 @@ var SolicitacoesController = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.service.atribuiSolicitacao(req.params.id, req.body)
-                            .then(function (solicitacao) { return res.status(200).json({ 'result': solicitacao }); })
+                            .then(function (solicitacao) { return res.status(200).json({ 'result': "Solicitação atribuida com sucesso" }); })
                             .catch(function (err) { return res.status(400).json({ 'result': err }); })];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
@@ -82,7 +96,7 @@ var SolicitacoesController = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.service.finalizaSolicitacao(req.params.id)
-                            .then(function (solicitacao) { return res.status(200).json({ 'result': solicitacao }); })
+                            .then(function (solicitacao) { return res.status(200).json({ 'result': "Solicitação finalizada com sucesso" }); })
                             .catch(function (err) { return res.status(400).json({ 'result': err }); })];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
@@ -94,7 +108,7 @@ var SolicitacoesController = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.service.cancelaSolicitacao(req.params.id)
-                            .then(function (solicitacao) { return res.status(200).json({ 'result': solicitacao }); })
+                            .then(function (solicitacao) { return res.status(200).json({ 'result': "Solicitação cancelada com sucesso" }); })
                             .catch(function (err) { return res.status(400).json({ 'result': err }); })];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
@@ -130,7 +144,7 @@ var SolicitacoesController = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.service.lerMensagem(req.params.idMensagem)
-                            .then(function (solicitacao) { return res.status(200).json({ 'result': solicitacao }); })
+                            .then(function (solicitacao) { return res.status(200).json({ 'result': "Mensagem lida!" }); })
                             .catch(function (err) { return res.status(400).json({ 'result': err }); })];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
