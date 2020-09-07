@@ -1,3 +1,5 @@
 import App from './App/Facades/app';
 
-App.app.listen(process.env.SERVER_PORT, () => console.log('servidor rodando'));
+var port = process.env.PORT || process.env.SERVER_PORT;
+
+App.app.listen(port, () => console.log('servidor rodando'));
