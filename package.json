@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.ts",
   "scripts": {
-    "start": "./node_modules/.bin/ts-node ./src/server.ts",
+    "start": "node ./build/server.js",
     "build": "tsc -p .", 
     "dev": "NODE_ENV=development nodemon ./node_modules/.bin/ts-node ./src/server.ts"
   },
