@@ -30,10 +30,10 @@ class SolicitacoesController {
             .catch(err => { return err });
     }
 
-    async atribuiSolicitacao(idSolicitante, idSolicitacao, idSolicitado) {
+    async atribuiSolicitacao(idSolicitacao, data) {
         let request = {
-            codSolicitante: idSolicitante,
-            codSolicitado: idSolicitado,
+            codSolicitante: data.idSolicitante,
+            codSolicitado: data.idSolicitado,
             status: this.repository.SOLICITACAO_EM_ANDAMENTO
         }
 
@@ -55,7 +55,31 @@ class SolicitacoesController {
             .catch(err => { return err });
     }
 
-    async buscaSolicitacoesdoUsuario(idUsuario) { }
+    async cancelaSolicitacao(idSolicitacao) {
+
+        //todo: tratar se a solicitacao está aberta e não tem solicitante
+
+        let request = {
+            status: this.repository.SOLICITACAO_CANCELADA,
+            ativo: 0
+        }
+
+        return await this.repository.editaSolicitacao(idSolicitacao, request)
+            .then(solicitacao => { return solicitacao })
+            .catch(err => { return err });
+    }
+
+    async buscaSolicitacoesDoUsuario(idUsuario) { 
+
+
+
+        return {
+            ativas: [],
+            emAndamento: [],
+            canceladas: [],
+            finalizadas: []
+        }
+    }
 
     async buscaAvaliacoesSolicitacoesFeitas(idUsuario) { }
 

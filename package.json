@@ -5,8 +5,8 @@
   "main": "server.ts",
   "scripts": {
     "start": "node ./build/server.js",
-    "build": "tsc -p .", 
-    "dev": "NODE_ENV=development nodemon ./node_modules/.bin/ts-node ./src/server.ts"
+    "build": "tsc -p .",
+    "dev": "NODE_ENV=development nodemon -L --watch 'server/**/*.ts' --exec ./node_modules/.bin/ts-node ./src/server.ts"
   },
   "author": "",
   "license": "ISC",
@@ -14,9 +14,10 @@
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
-    "nodemon": "^2.0.4",
     "express": "^4.17.1",
-    "mongoose": "^5.9.14"
+    "http-status": "^1.4.2",
+    "mongoose": "^5.9.14",
+    "nodemon": "^2.0.4"
   },
   "devDependencies": {
     "@types/body-parser": "^1.19.0",

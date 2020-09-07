@@ -89,4 +89,4 @@ var ServicosController = /** @class */ (function () {
     };
     return ServicosController;
 }());
-exports.default = ServicosController;
+exports.default = new ServicosController();

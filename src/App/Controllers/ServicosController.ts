@@ -42,4 +42,4 @@ class ServicosController {
 
 }
 
-export default ServicosController;
+export default new ServicosController();

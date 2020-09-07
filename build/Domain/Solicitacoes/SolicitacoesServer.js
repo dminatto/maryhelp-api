@@ -73,15 +73,15 @@ var SolicitacoesController = /** @class */ (function () {
             });
         });
     };
-    SolicitacoesController.prototype.atribuiSolicitacao = function (idSolicitante, idSolicitacao, idSolicitado) {
+    SolicitacoesController.prototype.atribuiSolicitacao = function (idSolicitacao, data) {
         return __awaiter(this, void 0, void 0, function () {
             var request;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         request = {
-                            codSolicitante: idSolicitante,
-                            codSolicitado: idSolicitado,
+                            codSolicitante: data.idSolicitante,
+                            codSolicitado: data.idSolicitado,
                             status: this.repository.SOLICITACAO_EM_ANDAMENTO
                         };
                         return [4 /*yield*/, this.repository.editaSolicitacao(idSolicitacao, request)
@@ -110,10 +110,35 @@ var SolicitacoesController = /** @class */ (function () {
             });
         });
     };
-    SolicitacoesController.prototype.buscaSolicitacoesdoUsuario = function (idUsuario) {
-        return __awaiter(this, void 0, void 0, function () { return __generator(this, function (_a) {
-            return [2 /*return*/];
-        }); });
+    SolicitacoesController.prototype.cancelaSolicitacao = function (idSolicitacao) {
+        return __awaiter(this, void 0, void 0, function () {
+            var request;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        request = {
+                            status: this.repository.SOLICITACAO_CANCELADA,
+                            ativo: 0
+                        };
+                        return [4 /*yield*/, this.repository.editaSolicitacao(idSolicitacao, request)
+                                .then(function (solicitacao) { return solicitacao; })
+                                .catch(function (err) { return err; })];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    SolicitacoesController.prototype.buscaSolicitacoesDoUsuario = function (idUsuario) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, {
+                        ativas: [],
+                        emAndamento: [],
+                        canceladas: [],
+                        finalizadas: []
+                    }];
+            });
+        });
     };
     SolicitacoesController.prototype.buscaAvaliacoesSolicitacoesFeitas = function (idUsuario) {
         return __awaiter(this, void 0, void 0, function () { return __generator(this, function (_a) {

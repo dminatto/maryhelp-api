@@ -167,4 +167,4 @@ var UsuarioController = /** @class */ (function () {
     };
     return UsuarioController;
 }());
-exports.default = UsuarioController;
+exports.default = new UsuarioController();

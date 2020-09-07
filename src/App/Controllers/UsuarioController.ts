@@ -64,4 +64,4 @@ class UsuarioController {
     }
 }
 
-export default UsuarioController;
+export default new UsuarioController();
