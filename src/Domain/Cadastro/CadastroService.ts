@@ -1,10 +1,8 @@
 
 import usuarioRepository from '../../Infrastructure/Repositorys/UsuarioRepository';
 import notificacaoService from './NotificacoesService';
-import authJwt from './Auth';
 import servicoService from '../Servicos/ServicoService';
 import privacidadeFactory from '../../Infrastructure/Factories/TermosUsoFactory'
-import solicitacaoService from '../Solicitacoes/SolicitacoesServer';
 import Auth from './Auth';
 
 class CadastroService {
@@ -12,13 +10,11 @@ class CadastroService {
     private usuarioRepository: usuarioRepository;
     private servicoService: servicoService;
     private notificacaoService: notificacaoService;
-    private solicitacaoService : solicitacaoService;
 
     constructor() {
         this.usuarioRepository = new usuarioRepository();
         this.servicoService = new servicoService();
         this.notificacaoService = new notificacaoService();
-        this.solicitacaoService = new solicitacaoService();
     }
 
     async login(data){
@@ -40,8 +36,6 @@ class CadastroService {
         var dadosEndereco = await this.buscaEndereco(id);
         var dadosServico = await this.servicoService.buscaServicosOferecidosPeloUsuario(id);
         var usuariosBloqueados = await this.buscaUsuariosBloqueados(id);
-        var avaliacoesFeitas = this.solicitacaoService.buscaAvaliacoesSolicitacoesFeitas(id);
-        var avaliacoesRecebidas = this.solicitacaoService.buscaAvaliacoesSolicitacoesRecebidas(id);
 
 
         var notificacao = await this.usuarioRepository.buscaTodasAsNotificacoesDoUsuario(id)
@@ -56,9 +50,7 @@ class CadastroService {
             endereco: dadosEndereco,
             servicosOferecidos: dadosServico,
             usuariosBloqueados: usuariosBloqueados,
-            notificacoes: notificacao,
-            avaliacoesFeitas: avaliacoesFeitas,
-            avaliacoesRecebidas: avaliacoesRecebidas
+            notificacoes: notificacao
         }];
 
     }
