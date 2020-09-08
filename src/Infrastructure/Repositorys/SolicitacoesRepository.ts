@@ -59,11 +59,11 @@ class SolicitacoesRepository {
     };
 
     buscaAvaliacoesRecebidas(idUsuario) {
-        //  return modelSolicitacaoAvaliacao.find({});
+          //return modelSolicitacaoAvaliacao.find({});
     }
 
     buscaAvaliacoesGeradas(idUsuario) {
-        // return modelSolicitacaoAvaliacao.find();
+        return modelSolicitacaoAvaliacao.find({codUsuario:idUsuario});
     }
 
     enviaMensagem(dados) {
