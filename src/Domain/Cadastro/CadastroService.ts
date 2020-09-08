@@ -1,21 +1,38 @@
 
 import usuarioRepository from '../../Infrastructure/Repositorys/UsuarioRepository';
 import notificacaoService from './NotificacoesService';
+import authJwt from './Auth';
 import servicoService from '../Servicos/ServicoService';
 import privacidadeFactory from '../../Infrastructure/Factories/TermosUsoFactory'
+import solicitacaoService from '../Solicitacoes/SolicitacoesServer';
+import Auth from './Auth';
 
 class CadastroService {
 
     private usuarioRepository: usuarioRepository;
     private servicoService: servicoService;
     private notificacaoService: notificacaoService;
+    private solicitacaoService : solicitacaoService;
 
     constructor() {
         this.usuarioRepository = new usuarioRepository();
         this.servicoService = new servicoService();
         this.notificacaoService = new notificacaoService();
+        this.solicitacaoService = new solicitacaoService();
     }
 
+    async login(data){
+
+        let usuario = data.user;
+        let senha = data.pass;
+        
+        let dados = await this.usuarioRepository.autenticaUsuario(usuario, senha)
+        .then(usuario => { return usuario})
+        .catch(err => {return err});
+
+        return Auth.geraToken(dados.id);
+
+    }
 
     async buscaDadosDoCadastro(id) {
 
@@ -23,6 +40,8 @@ class CadastroService {
         var dadosEndereco = await this.buscaEndereco(id);
         var dadosServico = await this.servicoService.buscaServicosOferecidosPeloUsuario(id);
         var usuariosBloqueados = await this.buscaUsuariosBloqueados(id);
+        var avaliacoesFeitas = this.solicitacaoService.buscaAvaliacoesSolicitacoesFeitas(id);
+        var avaliacoesRecebidas = this.solicitacaoService.buscaAvaliacoesSolicitacoesRecebidas(id);
 
 
         var notificacao = await this.usuarioRepository.buscaTodasAsNotificacoesDoUsuario(id)
@@ -31,14 +50,15 @@ class CadastroService {
             })
             .catch(err => { return err });
 
+
         return [{
             cadastro: dadosCadastro,
             endereco: dadosEndereco,
             servicosOferecidos: dadosServico,
             usuariosBloqueados: usuariosBloqueados,
             notificacoes: notificacao,
-            avaliacoesFeitas: [],
-            avaliacoesRecebidas: []
+            avaliacoesFeitas: avaliacoesFeitas,
+            avaliacoesRecebidas: avaliacoesRecebidas
         }];
 
     }
@@ -175,6 +195,18 @@ class CadastroService {
 
     }
 
+    async avaliacoesFeitas(idBloqueio) {
+        return await this.usuarioRepository.desbloqueiaUsuario(idBloqueio)
+            .then(r => "Usuário desbloqueado com sucesso!")
+            .catch(err => { return err });
+
+    }
+    async avaliacoesRecebidas(idBloqueio) {
+        return await this.usuarioRepository.desbloqueiaUsuario(idBloqueio)
+            .then(r => "Usuário desbloqueado com sucesso!")
+            .catch(err => { return err });
+
+    }
 
     politicaDePrivacidade() { 
 

@@ -1,6 +1,11 @@
 # MaryHelp - API
 
+Mary Help é uma plataforma colaborativa criada no Mega Hack Women, e tem como objetivo proporcionar um local onde mulheres podem se conectar para buscarem auxílio mútuo.
+
+[Deploy da aplicação](https://maryhelp.herokuapp.com/)
 [Documentação](https://dminatto.github.io/maryhelp-api/doc/index.html)
+[Pitch](https://www.youtube.com/watch?v=sqjqv-4Lob8)
+
 
 ## Getting started
 
@@ -31,3 +36,5 @@ npm dev
 ```
 npm build
 ```
+-----
+Desenvolvido para o [Mega Hack Women 2020](https://www.megahackwomen.com.br/)

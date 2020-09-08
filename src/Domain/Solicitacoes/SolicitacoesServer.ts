@@ -106,9 +106,6 @@ class SolicitacoesController {
     }
 
     async cancelaSolicitacao(idSolicitacao) {
-
-        //todo: tratar se a solicitacao está aberta e não tem solicitante
-
         let request = {
             status: SOLICITACAO_CANCELADA,
             ativo: 0
@@ -186,9 +183,13 @@ class SolicitacoesController {
         };
     }
 
-    async buscaAvaliacoesSolicitacoesFeitas(idUsuario) { }
+    async buscaAvaliacoesSolicitacoesFeitas(idUsuario) { 
 
-    async buscaAvaliacoesSolicitacoesRecebidas(idUsuario) { }
+    }
+
+    async buscaAvaliacoesSolicitacoesRecebidas(idUsuario) {
+        
+     }
 
     async enviarMensagen(idUsuario, idSolicitacao, dados) {
 
@@ -213,12 +214,6 @@ class SolicitacoesController {
         return await this.repository.buscaHistoricoDeMensagens(idSolicitacao)
             .then(mensagem => { return mensagem })
             .catch(err => { return err });
-    }
-
-    async historicoDeMensagen() {
-
-        //todo: pegar a mensagem mais recente de cada solicitacao em aberto e listar;
-
     }
 
     isEmpty(obj) {

@@ -53,6 +53,18 @@ var SolicitacoesController = /** @class */ (function () {
             });
         });
     };
+    SolicitacoesController.prototype.buscaSolicitacoesPorServico = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.service.buscaTodasSolicitacoesPorTipoDeServico(req.params.idServico)
+                            .then(function (solicitacao) { return res.status(200).json({ 'result': solicitacao }); })
+                            .catch(function (err) { return res.status(400).json({ 'result': err }); })];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
     SolicitacoesController.prototype.buscaSolicitacoesEmAberto = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
             var solicitacoes;
@@ -148,6 +160,41 @@ var SolicitacoesController = /** @class */ (function () {
                             .catch(function (err) { return res.status(400).json({ 'result': err }); })];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
+            });
+        });
+    };
+    SolicitacoesController.prototype.sinalizaInteresse = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var interesse;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.service.sinalizaInteresse(req.body)];
+                    case 1:
+                        interesse = _a.sent();
+                        return [2 /*return*/, res.status(200).json({ 'result': interesse })];
+                }
+            });
+        });
+    };
+    SolicitacoesController.prototype.geraMatch = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var interesse;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.service.geraMatch(req.params.id)];
+                    case 1:
+                        interesse = _a.sent();
+                        return [2 /*return*/, res.status(200).json({ 'result': interesse })];
+                }
+            });
+        });
+    };
+    SolicitacoesController.prototype.recusaMatch = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var interesse;
+            return __generator(this, function (_a) {
+                interesse = this.service.recusaMatch(req.params.id);
+                return [2 /*return*/, res.status(200).json({ 'result': interesse })];
             });
         });
     };

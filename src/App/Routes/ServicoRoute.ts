@@ -172,7 +172,7 @@ class ServicoRoute {
         *       "error": "UseNortFound"
         *     }
         */
-        this.app.route('/usuario/:id/servicos/:servicoId').delete((req, res) => Controller.excluiServicoUsuario(req, res)); //testar depois
+        this.app.route('/usuario/:id/servicos/:servicoId').delete((req, res) => Controller.excluiServicoUsuario(req, res));
     }
 
 

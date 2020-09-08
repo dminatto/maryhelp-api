@@ -109,7 +109,7 @@ var ServicoRoute = /** @class */ (function () {
         */
         this.app.route('/usuario/:id/servicos').post(function (req, res) { return ServicosController_1.default.incluiServicoUsuario(req, res); });
         /**
-        * @api {put} usuario/:idUsuario/servicos/:idServico Inclui serviço para usuario
+        * @api {put} usuario/:idUsuario/servicos/:idServico Altera serviço para usuario
         * @apiVersion 1.0.0
         * @apiName incluiServicoUsuario
         * @apiGroup Usuario - Serviço
@@ -141,7 +141,7 @@ var ServicoRoute = /** @class */ (function () {
         */
         this.app.route('/usuario/:id/servicos/:servicoId').put(function (req, res) { return ServicosController_1.default.editaServicoUsuario(req, res); });
         /**
-        * @api {delete} usuario/:idUsuario/servicos/:idServico Inclui serviço para usuario
+        * @api {delete} usuario/:idUsuario/servicos/:idServico Exclui serviço para usuario
         * @apiVersion 1.0.0
         * @apiName incluiServicoUsuario
         * @apiGroup Usuario - Serviço

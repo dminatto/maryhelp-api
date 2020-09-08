@@ -18,6 +18,8 @@ class UsuarioController {
     }
 
     async login(req, res) {
+        let cadastro = await this.service.login(req.req.body)
+        return res.status(200).json({ 'result': cadastro });
     }
 
     async criaUsuario(req, res) {

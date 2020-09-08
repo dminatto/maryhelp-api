@@ -43,6 +43,9 @@ var SOLICITACAO_CANCELADA = 0;
 var SOLICITACAO_ABERTA = 1;
 var SOLICITACAO_EM_ANDAMENTO = 2;
 var SOLICITACAO_FINALIZADA = 3;
+var INTERESSE_AGUARDANDO = 0;
+var INTERESSE_APROVADO = 1;
+var INTERESSE_REPROVADO = 2;
 var SolicitacoesController = /** @class */ (function () {
     function SolicitacoesController() {
         this.repository = new SolicitacoesRepository_1.default();
@@ -109,6 +112,48 @@ var SolicitacoesController = /** @class */ (function () {
             });
         });
     };
+    SolicitacoesController.prototype.sinalizaInteresse = function (data) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.repository.criaInteresse(data).then(function (solicitacao) {
+                            //todo: enviar uma notificacao
+                            return "Interesse registrado com sucesso!";
+                        })
+                            .catch(function (err) { return err; })];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    SolicitacoesController.prototype.geraMatch = function (idInteresse) {
+        return __awaiter(this, void 0, void 0, function () {
+            var interesse;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.repository.match(idInteresse, INTERESSE_APROVADO)];
+                    case 1:
+                        _a.sent();
+                        return [4 /*yield*/, this.repository.buscaInteresse(idInteresse)
+                                .then(function (obj) { return obj; })
+                                .catch(function (err) { return err; })];
+                    case 2:
+                        interesse = _a.sent();
+                        return [4 /*yield*/, this.atribuiSolicitacao(interesse.codSolicitacao, { idSolicitado: interesse.codSolicitante })];
+                    case 3: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    SolicitacoesController.prototype.recusaMatch = function (idInteresse) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, this.repository.match(idInteresse, INTERESSE_REPROVADO)
+                        .then(function (obj) { return "Usuario recusado com sucesso!"; })
+                        .catch(function (err) { return err; })];
+            });
+        });
+    };
     SolicitacoesController.prototype.finalizaSolicitacao = function (idSolicitacao) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
@@ -145,19 +190,43 @@ var SolicitacoesController = /** @class */ (function () {
             });
         });
     };
-    SolicitacoesController.prototype.buscaSolicitacoesDoUsuario = function (idUsuario) {
+    SolicitacoesController.prototype.buscaTodasSolicitacoesEmAberto = function () {
         return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                return [2 /*return*/, {
-                        ativas: [],
-                        emAndamento: [],
-                        canceladas: [],
-                        finalizadas: []
-                    }];
+            var solicitacoes, listaSolicitacoes, _a, _b, _i, key, _c, _d;
+            return __generator(this, function (_e) {
+                switch (_e.label) {
+                    case 0: return [4 /*yield*/, this.repository.buscaSolicitacoesEmAberto()
+                            .then(function (solicitacao) { return solicitacao; })
+                            .catch(function (err) { return err; })];
+                    case 1:
+                        solicitacoes = _e.sent();
+                        listaSolicitacoes = new Array;
+                        console.log(solicitacoes);
+                        _a = [];
+                        for (_b in solicitacoes)
+                            _a.push(_b);
+                        _i = 0;
+                        _e.label = 2;
+                    case 2:
+                        if (!(_i < _a.length)) return [3 /*break*/, 5];
+                        key = _a[_i];
+                        if (this.isEmpty(solicitacoes[key].codSolicitante) || this.isEmpty(solicitacoes[key].codServico)) {
+                            return [3 /*break*/, 4];
+                        }
+                        _d = (_c = listaSolicitacoes).push;
+                        return [4 /*yield*/, this.detalhaSolicitacao(solicitacoes[key])];
+                    case 3:
+                        _d.apply(_c, [_e.sent()]);
+                        _e.label = 4;
+                    case 4:
+                        _i++;
+                        return [3 /*break*/, 2];
+                    case 5: return [2 /*return*/, listaSolicitacoes];
+                }
             });
         });
     };
-    SolicitacoesController.prototype.buscaTodasSolicitacoesEmAberto = function () {
+    SolicitacoesController.prototype.buscaTodasSolicitacoesPorTipoDeServico = function () {
         return __awaiter(this, void 0, void 0, function () {
             var solicitacoes, listaSolicitacoes, _a, _b, _i, key, _c, _d;
             return __generator(this, function (_e) {

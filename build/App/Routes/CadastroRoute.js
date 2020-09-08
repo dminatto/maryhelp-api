@@ -491,6 +491,59 @@ var CadastroRoute = /** @class */ (function () {
         *     }
         */
         this.app.route('/privacidade').get(function (req, res) { return UsuarioController_1.default.privacidade(req, res); });
+        /**
+        * @api {get} login
+        * @apiVersion 1.0.0
+        * @apiName logout
+        * @apiGroup Sistema
+        * @apiParam (parameters) {String} user usuario
+        * @apiParam (parameters) {String} pass senha do usuario
+        *  @apiParamExample {json} Request-Example:
+        * {
+        *   "user" : "maria",
+        *   "pass" : "1234"
+        * }
+        * @apiSuccess (200) {String} message  Ok
+        * @apiSuccessExample Success-Response:
+        * {
+        *   "result": {
+        *           "auth": "true",
+        *           "token": "gas\douLKÇdassdasdasdASWA+F09DS6501G65AW445265W1feawsrfd.waetgojiszaidfu1FV65SZR4"
+        *   }
+        * }
+        * @apiError error
+        * @apiErrorExample Error-Response:
+        *     HTTP/1.1 404 Not Found
+        *     {
+        *       "error": "UseNortFound"
+        *     }
+        */
+        this.app.get('/login', function (req, res) {
+            res.status(200).send({ auth: false, token: null });
+        });
+        /**
+        * @api {get} logout
+        * @apiVersion 1.0.0
+        * @apiName logout
+        * @apiGroup Sistema
+        * @apiSuccess (200) {String} message  Ok
+        * @apiSuccessExample Success-Response:
+        * {
+        *   "result": {
+        *           "auth": "false",
+        *           "token": "null"
+        *   }
+        * }
+        * @apiError error
+        * @apiErrorExample Error-Response:
+        *     HTTP/1.1 404 Not Found
+        *     {
+        *       "error": "UseNortFound"
+        *     }
+        */
+        this.app.get('/logout', function (req, res) {
+            res.status(200).send({ auth: false, token: null });
+        });
     };
     return CadastroRoute;
 }());

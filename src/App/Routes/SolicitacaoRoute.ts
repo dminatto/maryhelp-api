@@ -215,9 +215,38 @@ class SolicitacaoRoute {
         this.app.route('/solicitacao/:id/cancelar').get((req, res) => Controller.cancelaSolicitacao(req, res));
 
 
+        /**
+        * @api {get} solicitacao/:id/chat Busca histórico de mensagens
+        * @apiVersion 1.0.0
+        * @apiName recuperaHistoricoDoChat
+        * @apiGroup Solicitação - Mensagem
+        *
+        * @apiParam (parameters) {String} id id da mensagem
+        * @apiSuccess (200) {String} data  Ok
+        * @apiError error
+        * @apiErrorExample Error-Response:
+        *     HTTP/1.1 404 Not Found
+        *     {
+        *       "error": "UseNortFound"
+        *     }
+        */
         this.app.route('/solicitacao/:id/chat').get((req, res) => Controller.recuperaHistoricoDoChat(req, res));
 
-
+        /**
+        * @api {post} solicitacao/:id/chat Envia mensagem
+        * @apiVersion 1.0.0
+        * @apiName enviaMensagem
+        * @apiGroup Solicitação - Mensagem
+        *
+        * @apiParam (parameters) {String} id id solicitação
+        * @apiSuccess (200) {String} data  Ok
+        * @apiError error
+        * @apiErrorExample Error-Response:
+        *     HTTP/1.1 404 Not Found
+        *     {
+        *       "error": "UseNortFound"
+        *     }
+        */
         this.app.route('/solicitacao/:id/chat').post((req, res) => Controller.enviaMensagem(req, res));
 
         /**

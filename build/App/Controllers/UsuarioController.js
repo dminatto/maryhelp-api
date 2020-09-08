@@ -56,6 +56,13 @@ var UsuarioController = /** @class */ (function () {
             });
         });
     };
+    UsuarioController.prototype.login = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/];
+            });
+        });
+    };
     UsuarioController.prototype.criaUsuario = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
             var cadastro;

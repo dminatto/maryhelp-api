@@ -12,7 +12,7 @@ var SistemaRoute = /** @class */ (function () {
         this.listaRotas();
     }
     SistemaRoute.prototype.listaRotas = function () {
-        this.app.route('/').get(function (req, res) { return res.status(200).json({ 'message': 'Hello world!' }); });
+        this.app.route('/').get(function (req, res) { return res.status(200).json({ 'message': 'Para saber mais sobre os endpoints consulte: https://dminatto.github.io/maryhelp-api/doc/index.html' }); });
     };
     return SistemaRoute;
 }());

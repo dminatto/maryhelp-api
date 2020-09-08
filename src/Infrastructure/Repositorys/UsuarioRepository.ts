@@ -17,6 +17,10 @@ class UsuarioRepository {
         return modelUsuario.create(dados);
     }
 
+    async autenticaUsuario(user, password){
+        return modelUsuario.find({usuario: user, senha: password});
+    }
+
     async atualizaUsuario(id, dados){
         return modelUsuario.findById(id).update(dados);
     }

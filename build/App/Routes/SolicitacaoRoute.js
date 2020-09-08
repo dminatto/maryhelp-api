@@ -8,7 +8,7 @@ var SolicitacaoRoute = /** @class */ (function () {
     }
     SolicitacaoRoute.prototype.listaRotas = function () {
         /**
-         * @api {post} /solicitacao Busca todas as solicitações em aberto
+         * @api {get} solicitacao Busca todas as solicitações em aberto
          * @apiVersion 1.0.0
          * @apiName buscaSolicitacoesEmAberto
          * @apiGroup Solicitação
@@ -68,6 +68,33 @@ var SolicitacaoRoute = /** @class */ (function () {
         */
         this.app.route('/usuario/:id/solicitacoes').get(function (req, res) { return SolicitacoesController_1.default.buscaSolicitacoes(req, res); });
         /**
+        * @api {get} solicitacoes/servico/:idServico Busca solicitação por serviço
+        * @apiVersion 1.0.0
+        * @apiName buscaSolicitacoesPorServico
+        * @apiGroup Solicitação
+        * @apiSuccessExample Success-Response:
+        * {
+        *   "result": [{
+        *        "_id": "5f56a00b9c1547586b69b917",
+        *        "codSolicitante": [
+        *            "5f55a5e825a0cfbdfa30b078"
+        *        ],
+        *        "nomeCompleto": "Maria Mercedes",
+        *        "codServico": [
+        *            "5f556a38363c4a936c0fd74c"
+        *        ],
+        *        "dataSolicitacao": "2020-09-07T21:03:07.464Z"
+        *    },
+        * ]}
+        * @apiError error
+        * @apiErrorExample Error-Response:
+        *     HTTP/1.1 404 Not Found
+        *     {
+        *       "error": "UseNortFound"
+        *     }
+        */
+        this.app.route('solicitacoes/servico/:idServico').get(function (req, res) { return SolicitacoesController_1.default.buscaSolicitacoesPorServico(req, res); });
+        /**
        * @api {post} usuario/:id/solicitacoes Cadastra solicitação
        * @apiVersion 1.0.0
        * @apiName criaSolicitacao
@@ -121,7 +148,7 @@ var SolicitacaoRoute = /** @class */ (function () {
         * @apiParamExample {json} Request-Example:
         * {
         *   "idSolicitado" : "5f55a5e825a0cfbdfa30b078"
-        * }        *
+        * }
         * @apiSuccess (200) {String} message  Ok
         * @apiSuccessExample Success-Response:
         * {
@@ -140,7 +167,6 @@ var SolicitacaoRoute = /** @class */ (function () {
        * @apiVersion 1.0.0
        * @apiName finalizacaoSolicitacao
        * @apiGroup Solicitação
-       *
        * @apiParam (parameters) {String} id id solicitação
        * @apiSuccess (200) {String} message  Ok
        * @apiSuccessExample Success-Response:
@@ -178,7 +204,7 @@ var SolicitacaoRoute = /** @class */ (function () {
         this.app.route('/solicitacao/:id/chat').get(function (req, res) { return SolicitacoesController_1.default.recuperaHistoricoDoChat(req, res); });
         this.app.route('/solicitacao/:id/chat').post(function (req, res) { return SolicitacoesController_1.default.enviaMensagem(req, res); });
         /**
-        * @api {get}so licitacao/:id/chat/:idMensagem/visualizar Marca mensagem como lida
+        * @api {get} solicitacao/:id/chat/:idMensagem/visualizar Marca mensagem como lida
         * @apiVersion 1.0.0
         * @apiName marcaMensagemComoLida
         * @apiGroup Usuario - Notificação
@@ -189,7 +215,7 @@ var SolicitacaoRoute = /** @class */ (function () {
         * @apiSuccess (200) {String} message  Ok
         * @apiSuccessExample Success-Response:
         * {
-        *   result": "Serviço lida!
+        *   "result": "Serviço lida!""
         * }
         * @apiError error
         * @apiErrorExample Error-Response:
@@ -199,28 +225,73 @@ var SolicitacaoRoute = /** @class */ (function () {
         *     }
         */
         this.app.route('/solicitacao/:id/chat/:idMensagem/visualizar').get(function (req, res) { return SolicitacoesController_1.default.marcaMensagemComoLida(req, res); });
-        /*
-        rota monta-feed
-
-
-        /p/ escolher
-demonstra-interesse
-
-lista solicitacoes da pessoa
-tabela de interesse e detalha usuario
-
-        
-        p/ solicitacoes
-        monta feed
-        id usuario
-        servicos do usuario
-        select * from solicitacoes em aberto
-        
-        rota demonstra-interesse
-        registra o interesse
-
-
+        /**
+        * @api {post} solicitacao/registraInteresse Demonstra interesse em ajudar
+        * @apiVersion 1.0.0
+        * @apiName sinalizaInteresse
+        * @apiGroup Usuario - Solicitacao
+        *
+        * @apiParam (parameters) {String} codSolicitacao codigo da solicitacao
+        * @apiParam (parameters) {String} codSolicitante codigo do usuario interessado
+        * @apiParamExample {json} Request-Example:
+        * {
+        *   "codSolicitacao" : "5f55a5e825a0cfbdfa30b078",
+        *   "codSolicitante" : "5f55a5e825a0cfbdfa30b078"
+        * }
+        * @apiSuccess (200) {String} message  Ok
+        * @apiSuccessExample Success-Response:
+        * {
+        *   "result": "Interesse registrado com sucesso"
+        *
+        * }
+        * @apiError error
+        * @apiErrorExample Error-Response:
+        *     HTTP/1.1 404 Not Found
+        *     {
+        *       "error": "UseNortFound"
+        *     }
         */
+        this.app.route('/solicitacao/registraInteresse').post(function (req, res) { return SolicitacoesController_1.default.sinalizaInteresse(req, res); });
+        /**
+       * @api {get} interesse/:id/aprova Aprova interesse
+       * @apiVersion 1.0.0
+       * @apiName marcaMensagemComoLida
+       * @apiGroup Usuario - Solicitação
+       *
+       * @apiParam (parameters) {String} id codigo do interesse
+       *
+       * @apiSuccess (200) {String} message  Ok
+       * @apiSuccessExample Success-Response:
+       * {
+       *   "result": "Solicitacao atribuida com sucesso!"
+       * }
+       * @apiError error
+       * @apiErrorExample Error-Response:
+       *     HTTP/1.1 404 Not Found
+       *     {
+       *       "error": "UseNortFound"
+       *     }
+       */
+        this.app.route('/interesse/:id/aprova').get(function (req, res) { return SolicitacoesController_1.default.geraMatch(req, res); });
+        /**
+       * @api {get} interesse/:id/recusa
+       * @apiVersion 1.0.0
+       * @apiName marcaMensagemComoLida
+       * @apiGroup Usuario - Solicitação
+       * @apiParam (parameters) {String} id codigo do interesse
+       * @apiSuccess (200) {String} message  Ok
+       * @apiSuccessExample Success-Response:
+       * {
+       *   "result": "Usuario recusado com sucesso!"
+       * }
+       * @apiError error
+       * @apiErrorExample Error-Response:
+       *     HTTP/1.1 404 Not Found
+       *     {
+       *       "error": "UseNortFound"
+       *     }
+       */
+        this.app.route('/interesse/:id/recusa').get(function (req, res) { return SolicitacoesController_1.default.recusaMatch(req, res); });
     };
     return SolicitacaoRoute;
 }());

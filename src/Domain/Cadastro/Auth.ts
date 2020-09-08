@@ -6,7 +6,6 @@ class Auth {
 
     geraToken(id) {
 
-
         //valida usuario e senha
 
         var token = jwt.sign({ id }, process.env.SECRET, {
@@ -16,12 +15,12 @@ class Auth {
         return { auth: true, token: token };
     }
 
-    verifyJWT(token) {
+    verificaJWT(token) {
         //var token = req.headers['x-access-token'];
-        if (!token) return { auth: false, message: 'No token provided.' };
+        if (!token) return { auth: false, message: 'Usuário sem token.' };
 
         jwt.verify(token, process.env.SECRET, function (err, decoded) {
-            if (err) return { auth: false, message: 'Failed to authenticate token.' };
+            if (err) return { auth: false, message: 'Falha na autenticação do token.' };
             return { auth: true, usuario: decoded.id };
         });
 
@@ -29,4 +28,4 @@ class Auth {
 
 }
 
-export default Auth;
+export default new Auth();

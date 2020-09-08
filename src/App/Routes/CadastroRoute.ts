@@ -13,10 +13,7 @@ class CadastroRoute {
         this.listaRotas();
     }
 
-
     listaRotas() {
-
-
         /**
         * @api {post} novo-cadastro Cadastro de usuario
         * @apiVersion 1.0.0
@@ -414,7 +411,7 @@ class CadastroRoute {
         *       "error": "UseNortFound"
         *     }
         */
-        this.app.route('/usuario/:id/endereco/:enderecoId').delete((req, res) => Controller.excluiEndereco(req, res)); //testar depois
+        this.app.route('/usuario/:id/endereco/:enderecoId').delete((req, res) => Controller.excluiEndereco(req, res)); 
 
         /**
         * @api {put} usuario/:id/notificacoes/:notificacaoId' Marca notificação como lida
@@ -481,7 +478,7 @@ class CadastroRoute {
         *       "error": "UseNortFound"
         *     }
         */
-        this.app.route('/usuario/:id/block/:blockid').delete((req, res) => Controller.deletaBloqueio(req, res));//testar depois
+        this.app.route('/usuario/:id/block/:blockid').delete((req, res) => Controller.deletaBloqueio(req, res));
 
         /**
         * @api {get} privacidade Retorna o código de privacidade e termos de uso
@@ -541,7 +538,7 @@ class CadastroRoute {
         *     }
         */
         this.app.get('/login', function (req, res) {
-            res.status(200).send({ auth: false, token: null });
+            res.status(200).send(Controller.login(req, res));
         });
 
 
