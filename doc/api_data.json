@@ -148,7 +148,7 @@
         }
       ]
     },
-    "filename": "./src/App/Routes/ServicoRoute.ts",
+    "filename": "./build/App/Routes/ServicoRoute.js",
     "groupTitle": "Serviços"
   },
   {
@@ -224,15 +224,15 @@
         }
       ]
     },
-    "filename": "./build/App/Routes/ServicoRoute.js",
+    "filename": "./src/App/Routes/ServicoRoute.ts",
     "groupTitle": "Serviços"
   },
   {
     "type": "get",
-    "url": "privacidade",
-    "title": "Retorna o código de privacidade e termos de uso",
+    "url": "logout",
+    "title": "",
     "version": "1.0.0",
-    "name": "privacidade",
+    "name": "logout",
     "group": "Sistema",
     "success": {
       "fields": {
@@ -249,7 +249,83 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    \"result\": [\n      {\n        \"titulo\": \"Termos de Uso\",\n        \"descricao\": \"Lorem ipsum dolor sit amet....\"\n      },\n      {\n        \"titulo\": \"Politica de Privacidade\",\n        \"descricao\": \"Lorem ipsum dolor sit amet...\"\n      }]\n}",
+          "content": "{\n  \"result\": {\n          \"auth\": \"false\",\n          \"token\": \"null\"\n  }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "error",
+            "description": ""
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"UseNortFound\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./src/App/Routes/CadastroRoute.ts",
+    "groupTitle": "Sistema"
+  },
+  {
+    "type": "get",
+    "url": "login",
+    "title": "",
+    "version": "1.0.0",
+    "name": "logout",
+    "group": "Sistema",
+    "parameter": {
+      "fields": {
+        "parameters": [
+          {
+            "group": "parameters",
+            "type": "String",
+            "optional": false,
+            "field": "user",
+            "description": "<p>usuario</p>"
+          },
+          {
+            "group": "parameters",
+            "type": "String",
+            "optional": false,
+            "field": "pass",
+            "description": "<p>senha do usuario</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"user\" : \"maria\",\n  \"pass\" : \"1234\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Ok</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n  \"result\": {\n          \"auth\": \"true\",\n          \"token\": \"gas\\douLKÇdassdasdasdASWA+F09DS6501G65AW445265W1feawsrfd.waetgojiszaidfu1FV65SZR4\"\n  }\n}",
           "type": "json"
         }
       ]
@@ -323,6 +399,55 @@
       ]
     },
     "filename": "./build/App/Routes/CadastroRoute.js",
+    "groupTitle": "Sistema"
+  },
+  {
+    "type": "get",
+    "url": "privacidade",
+    "title": "Retorna o código de privacidade e termos de uso",
+    "version": "1.0.0",
+    "name": "privacidade",
+    "group": "Sistema",
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Ok</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n    \"result\": [\n      {\n        \"titulo\": \"Termos de Uso\",\n        \"descricao\": \"Lorem ipsum dolor sit amet....\"\n      },\n      {\n        \"titulo\": \"Politica de Privacidade\",\n        \"descricao\": \"Lorem ipsum dolor sit amet...\"\n      }]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "error",
+            "description": ""
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"UseNortFound\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./src/App/Routes/CadastroRoute.ts",
     "groupTitle": "Sistema"
   },
   {
@@ -875,89 +1000,6 @@
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "{\n  \"codSolicitado\": \"5f568faa13f5824934eadf1a\",\n           \"codServico\": \"5f556a38363c4a936c0fd74c\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "success": {
-      "fields": {
-        "200": [
-          {
-            "group": "200",
-            "type": "String",
-            "optional": false,
-            "field": "data",
-            "description": "<p>Ok</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "{\n \"result\": {\n  \"codSolicitante\": [\n      \"5f55a5e825a0cfbdfa30b078\"\n      ],\n      \"codSolicitado\": [\n      \"5f568faa13f5824934eadf1a\"\n      ],\n      \"codServico\": [\n      \"5f556a38363c4a936c0fd74c\"\n      ],\n      \"status\": 1,\n      \"ativo\": true,\n      \"_id\": \"5f56a00b9c1547586b69b917\",\n      \"dataSolicitacao\": \"2020-09-07T21:03:07.464Z\",\n      \"__v\": 0\n ]}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "fields": {
-        "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "optional": false,
-            "field": "error",
-            "description": ""
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Error-Response:",
-          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"UseNortFound\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "./build/App/Routes/SolicitacaoRoute.js",
-    "groupTitle": "Solicitação"
-  },
-  {
-    "type": "post",
-    "url": "usuario/:id/solicitacoes",
-    "title": "Cadastra solicitação",
-    "version": "1.0.0",
-    "name": "criaSolicitacao",
-    "group": "Solicitação",
-    "parameter": {
-      "fields": {
-        "parameters": [
-          {
-            "group": "parameters",
-            "type": "String",
-            "optional": false,
-            "field": "id",
-            "description": "<p>id do usuario</p>"
-          },
-          {
-            "group": "parameters",
-            "type": "String",
-            "optional": false,
-            "field": "codSolicitado",
-            "description": "<p>Código do serviço</p>"
-          },
-          {
-            "group": "parameters",
-            "type": "String",
-            "optional": false,
-            "field": "codServico",
-            "description": "<p>Código do serviço</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Request-Example:",
           "content": "    {\n      \"codSolicitado\": \"5f568faa13f5824934eadf1a\",\n\t            \"codServico\": \"5f556a38363c4a936c0fd74c\"\n    }",
           "type": "json"
         }
@@ -1006,11 +1048,11 @@
     "groupTitle": "Solicitação"
   },
   {
-    "type": "get",
-    "url": "solicitacao/:id/finalizar",
-    "title": "Finaliza solicitação",
+    "type": "post",
+    "url": "usuario/:id/solicitacoes",
+    "title": "Cadastra solicitação",
     "version": "1.0.0",
-    "name": "finalizacaoSolicitacao",
+    "name": "criaSolicitacao",
     "group": "Solicitação",
     "parameter": {
       "fields": {
@@ -1020,10 +1062,31 @@
             "type": "String",
             "optional": false,
             "field": "id",
-            "description": "<p>id solicitação</p>"
+            "description": "<p>id do usuario</p>"
+          },
+          {
+            "group": "parameters",
+            "type": "String",
+            "optional": false,
+            "field": "codSolicitado",
+            "description": "<p>Código do serviço</p>"
+          },
+          {
+            "group": "parameters",
+            "type": "String",
+            "optional": false,
+            "field": "codServico",
+            "description": "<p>Código do serviço</p>"
           }
         ]
-      }
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"codSolicitado\": \"5f568faa13f5824934eadf1a\",\n           \"codServico\": \"5f556a38363c4a936c0fd74c\"\n}",
+          "type": "json"
+        }
+      ]
     },
     "success": {
       "fields": {
@@ -1032,7 +1095,7 @@
             "group": "200",
             "type": "String",
             "optional": false,
-            "field": "message",
+            "field": "data",
             "description": "<p>Ok</p>"
           }
         ]
@@ -1040,7 +1103,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n  \"result\": \"Solicitação finalizada com sucesso\"\n}",
+          "content": "{\n \"result\": {\n  \"codSolicitante\": [\n      \"5f55a5e825a0cfbdfa30b078\"\n      ],\n      \"codSolicitado\": [\n      \"5f568faa13f5824934eadf1a\"\n      ],\n      \"codServico\": [\n      \"5f556a38363c4a936c0fd74c\"\n      ],\n      \"status\": 1,\n      \"ativo\": true,\n      \"_id\": \"5f56a00b9c1547586b69b917\",\n      \"dataSolicitacao\": \"2020-09-07T21:03:07.464Z\",\n      \"__v\": 0\n ]}",
           "type": "json"
         }
       ]
@@ -1131,11 +1194,11 @@
   },
   {
     "type": "get",
-    "url": "solicitacao/:id/chat/:idMensagem/visualizar",
-    "title": "Marca mensagem como lida",
+    "url": "solicitacao/:id/finalizar",
+    "title": "Finaliza solicitação",
     "version": "1.0.0",
-    "name": "marcaMensagemComoLida",
-    "group": "Usuario_-_Notificação",
+    "name": "finalizacaoSolicitacao",
+    "group": "Solicitação",
     "parameter": {
       "fields": {
         "parameters": [
@@ -1144,14 +1207,7 @@
             "type": "String",
             "optional": false,
             "field": "id",
-            "description": "<p>codigo do usuario</p>"
-          },
-          {
-            "group": "parameters",
-            "type": "String",
-            "optional": false,
-            "field": "idMensagem",
-            "description": "<p>codigo da mensagem</p>"
+            "description": "<p>id solicitação</p>"
           }
         ]
       }
@@ -1171,7 +1227,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n  \"result\": \"Serviço lida!\"\"\n}",
+          "content": "{\n  \"result\": \"Solicitação finalizada com sucesso\"\n}",
           "type": "json"
         }
       ]
@@ -1195,8 +1251,8 @@
         }
       ]
     },
-    "filename": "./src/App/Routes/SolicitacaoRoute.ts",
-    "groupTitle": "Usuario_-_Notificação"
+    "filename": "./build/App/Routes/SolicitacaoRoute.js",
+    "groupTitle": "Solicitação"
   },
   {
     "type": "get",
@@ -1268,12 +1324,12 @@
     "groupTitle": "Usuario_-_Notificação"
   },
   {
-    "type": "delete",
-    "url": "usuario/:idUsuario/servicos/:idServico",
-    "title": "Inclui serviço para usuario",
+    "type": "get",
+    "url": "solicitacao/:id/chat/:idMensagem/visualizar",
+    "title": "Marca mensagem como lida",
     "version": "1.0.0",
-    "name": "incluiServicoUsuario",
-    "group": "Usuario_-_Serviço",
+    "name": "marcaMensagemComoLida",
+    "group": "Usuario_-_Notificação",
     "parameter": {
       "fields": {
         "parameters": [
@@ -1281,15 +1337,15 @@
             "group": "parameters",
             "type": "String",
             "optional": false,
-            "field": "idUsuario",
+            "field": "id",
             "description": "<p>codigo do usuario</p>"
           },
           {
             "group": "parameters",
             "type": "String",
             "optional": false,
-            "field": "idServico",
-            "description": "<p>codigo do serviço</p>"
+            "field": "idMensagem",
+            "description": "<p>codigo da mensagem</p>"
           }
         ]
       }
@@ -1309,7 +1365,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n  result\": \"Serviço excluido com sucesso!\n}",
+          "content": "{\n  \"result\": \"Serviço lida!\"\"\n}",
           "type": "json"
         }
       ]
@@ -1333,12 +1389,12 @@
         }
       ]
     },
-    "filename": "./build/App/Routes/ServicoRoute.js",
-    "groupTitle": "Usuario_-_Serviço"
+    "filename": "./src/App/Routes/SolicitacaoRoute.ts",
+    "groupTitle": "Usuario_-_Notificação"
   },
   {
-    "type": "delete",
-    "url": "usuario/:idUsuario/servicos/:idServico",
+    "type": "post",
+    "url": "usuario/:id/servicos",
     "title": "Inclui serviço para usuario",
     "version": "1.0.0",
     "name": "incluiServicoUsuario",
@@ -1350,18 +1406,46 @@
             "group": "parameters",
             "type": "String",
             "optional": false,
-            "field": "idUsuario",
-            "description": "<p>codigo do usuario</p>"
+            "field": "id",
+            "description": "<p>id do usuario</p>"
           },
           {
             "group": "parameters",
             "type": "String",
             "optional": false,
-            "field": "idServico",
+            "field": "codServico",
             "description": "<p>codigo do serviço</p>"
+          },
+          {
+            "group": "parameters",
+            "type": "String",
+            "optional": false,
+            "field": "tipoAtendimento",
+            "description": "<p>tipo de atendimento</p>"
+          },
+          {
+            "group": "parameters",
+            "type": "Boolean",
+            "optional": false,
+            "field": "aceitaPermuta",
+            "description": "<p>aceita permuta</p>"
+          },
+          {
+            "group": "parameters",
+            "type": "Numeric",
+            "optional": false,
+            "field": "valor",
+            "description": "<p>valor do serviço oferecido</p>"
           }
         ]
-      }
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"codServico\": \"5f555bb6628056885e50a2e7\",\n  \"tipoAtendimento\": \"Presencial\",\n  \"aceitaPermuta\": \"1\",\n  \"valor\": \"25.00\"\n}",
+          "type": "json"
+        }
+      ]
     },
     "success": {
       "fields": {
@@ -1378,7 +1462,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n  result\": \"Serviço excluido com sucesso!\n}",
+          "content": "{\n  result\": \"Serviço incluso com sucesso!\n}",
           "type": "json"
         }
       ]
@@ -1408,7 +1492,7 @@
   {
     "type": "put",
     "url": "usuario/:idUsuario/servicos/:idServico",
-    "title": "Inclui serviço para usuario",
+    "title": "Altera serviço para usuario",
     "version": "1.0.0",
     "name": "incluiServicoUsuario",
     "group": "Usuario_-_Serviço",
@@ -1596,7 +1680,7 @@
         }
       ]
     },
-    "filename": "./src/App/Routes/ServicoRoute.ts",
+    "filename": "./build/App/Routes/ServicoRoute.js",
     "groupTitle": "Usuario_-_Serviço"
   },
   {
@@ -1697,8 +1781,8 @@
     "groupTitle": "Usuario_-_Serviço"
   },
   {
-    "type": "post",
-    "url": "usuario/:id/servicos",
+    "type": "delete",
+    "url": "usuario/:idUsuario/servicos/:idServico",
     "title": "Inclui serviço para usuario",
     "version": "1.0.0",
     "name": "incluiServicoUsuario",
@@ -1710,46 +1794,18 @@
             "group": "parameters",
             "type": "String",
             "optional": false,
-            "field": "id",
-            "description": "<p>id do usuario</p>"
+            "field": "idUsuario",
+            "description": "<p>codigo do usuario</p>"
           },
           {
             "group": "parameters",
             "type": "String",
             "optional": false,
-            "field": "codServico",
+            "field": "idServico",
             "description": "<p>codigo do serviço</p>"
-          },
-          {
-            "group": "parameters",
-            "type": "String",
-            "optional": false,
-            "field": "tipoAtendimento",
-            "description": "<p>tipo de atendimento</p>"
-          },
-          {
-            "group": "parameters",
-            "type": "Boolean",
-            "optional": false,
-            "field": "aceitaPermuta",
-            "description": "<p>aceita permuta</p>"
-          },
-          {
-            "group": "parameters",
-            "type": "Numeric",
-            "optional": false,
-            "field": "valor",
-            "description": "<p>valor do serviço oferecido</p>"
           }
         ]
-      },
-      "examples": [
-        {
-          "title": "Request-Example:",
-          "content": "{\n  \"codServico\": \"5f555bb6628056885e50a2e7\",\n  \"tipoAtendimento\": \"Presencial\",\n  \"aceitaPermuta\": \"1\",\n  \"valor\": \"25.00\"\n}",
-          "type": "json"
-        }
-      ]
+      }
     },
     "success": {
       "fields": {
@@ -1766,7 +1822,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n  result\": \"Serviço incluso com sucesso!\n}",
+          "content": "{\n  result\": \"Serviço excluido com sucesso!\n}",
           "type": "json"
         }
       ]
@@ -1791,6 +1847,75 @@
       ]
     },
     "filename": "./build/App/Routes/ServicoRoute.js",
+    "groupTitle": "Usuario_-_Serviço"
+  },
+  {
+    "type": "delete",
+    "url": "usuario/:idUsuario/servicos/:idServico",
+    "title": "Exclui serviço para usuario",
+    "version": "1.0.0",
+    "name": "incluiServicoUsuario",
+    "group": "Usuario_-_Serviço",
+    "parameter": {
+      "fields": {
+        "parameters": [
+          {
+            "group": "parameters",
+            "type": "String",
+            "optional": false,
+            "field": "idUsuario",
+            "description": "<p>codigo do usuario</p>"
+          },
+          {
+            "group": "parameters",
+            "type": "String",
+            "optional": false,
+            "field": "idServico",
+            "description": "<p>codigo do serviço</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Ok</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n  result\": \"Serviço excluido com sucesso!\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "error",
+            "description": ""
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"UseNortFound\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./src/App/Routes/ServicoRoute.ts",
     "groupTitle": "Usuario_-_Serviço"
   },
   {
@@ -1822,7 +1947,7 @@
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "{\n  \"codSolicitacao\" : \"5f55a5e825a0cfbdfa30b078\"\n  \"codSolicitante\" : \"5f55a5e825a0cfbdfa30b078\"\n}",
+          "content": "{\n  \"codSolicitacao\" : \"5f55a5e825a0cfbdfa30b078\",\n  \"codSolicitante\" : \"5f55a5e825a0cfbdfa30b078\"\n}",
           "type": "json"
         }
       ]
@@ -2496,7 +2621,7 @@
         }
       ]
     },
-    "filename": "./build/App/Routes/CadastroRoute.js",
+    "filename": "./src/App/Routes/CadastroRoute.ts",
     "groupTitle": "Usuário_-_Endereço"
   },
   {
@@ -2614,7 +2739,7 @@
         }
       ]
     },
-    "filename": "./src/App/Routes/CadastroRoute.ts",
+    "filename": "./build/App/Routes/CadastroRoute.js",
     "groupTitle": "Usuário_-_Endereço"
   },
   {
@@ -2807,7 +2932,7 @@
         }
       ]
     },
-    "filename": "./build/App/Routes/CadastroRoute.js",
+    "filename": "./src/App/Routes/CadastroRoute.ts",
     "groupTitle": "Usuário_-_Lista_de_Bloqueio"
   },
   {
@@ -2876,7 +3001,7 @@
         }
       ]
     },
-    "filename": "./src/App/Routes/CadastroRoute.ts",
+    "filename": "./build/App/Routes/CadastroRoute.js",
     "groupTitle": "Usuário_-_Lista_de_Bloqueio"
   },
   {
@@ -2945,7 +3070,7 @@
         }
       ]
     },
-    "filename": "./build/App/Routes/CadastroRoute.js",
+    "filename": "./src/App/Routes/CadastroRoute.ts",
     "groupTitle": "Usuário_-_Notificação"
   },
   {
@@ -3014,7 +3139,7 @@
         }
       ]
     },
-    "filename": "./src/App/Routes/CadastroRoute.ts",
+    "filename": "./build/App/Routes/CadastroRoute.js",
     "groupTitle": "Usuário_-_Notificação"
   },
   {
@@ -3076,7 +3201,7 @@
         }
       ]
     },
-    "filename": "./src/App/Routes/CadastroRoute.ts",
+    "filename": "./build/App/Routes/CadastroRoute.js",
     "groupTitle": "Usuário"
   },
   {
@@ -3138,64 +3263,6 @@
         }
       ]
     },
-    "filename": "./build/App/Routes/CadastroRoute.js",
-    "groupTitle": "Usuário"
-  },
-  {
-    "type": "post",
-    "url": "novo-cadastro",
-    "title": "Cadastro de usuario",
-    "version": "1.0.0",
-    "name": "criaUsuario",
-    "group": "Usuário",
-    "parameter": {
-      "examples": [
-        {
-          "title": "Request-Example:",
-          "content": "{\n\t\"cadastro\": {\n   \"nome\": \"Gabriela\",\n   \"sobrenome\": \"Silva\",\n   \"dataNascimento\": \"11/10/1990\",\n   \"usuario\": \"gabis\",\n   \"senha\": 1234,\n   \"telefone\": \"000000000\",\n   \"email\": \"gabi.s@email.com\",\n   \"temfilhos\": \"0\",\n   \"foto\" : \"/.../.../foto.png\"\n   },\n  \"endereco\": {\n      \"0\": {\n          \"tipoEndereco\": \"comercial\",\n          \"cep\": \"000000000\",\n          \"uf\": \"SC\",\n          \"cidade\": \"Cidade\",\n          \"bairro\": \"Centro\",\n          \"endereco\": \"rua das laranjeiras\",\n          \"numero\": \"20\"\n      }\n  },\n  \"servicosOferecidos\": {\n      \"0\": {\n          \"codServico\": \"5f556a38363c4a936c0fd74c\",\n          \"tipoAtendimento\": \"Presencial\",\n          \"aceitaPermuta\": \"0\",\n          \"valor\": \"60.00\"\n      },\n      \"1\": {\n          \"codServico\": \"5f556a40363c4a936c0fd74d\",\n          \"tipoAtendimento\": \"Online\",\n          \"aceitaPermuta\": \"1\",\n          \"valor\": \"00.00\"\n      }\n  }\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "success": {
-      "fields": {
-        "200": [
-          {
-            "group": "200",
-            "type": "String",
-            "optional": false,
-            "field": "data",
-            "description": "<p>Ok</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "{\n  \"result\": [{\n      \"cadastro\": {\n        \"_id\": \"5f55a5e825a0cfbdfa30b078\",\n        \"nome\": \"Maria\",\n        \"sobrenome\": \"Mercedes\",\n        \"dataNascimento\": \"1990-11-10T02:00:00.000Z\",\n        \"usuario\": \"gabis\",\n        \"senha\": \"4654654\",\n        \"telefone\": 88888888,\n        \"email\": \"mariadobairro@email.com\",\n        \"dataRegistro\": \"2020-09-07T03:15:52.703Z\",\n        \"__v\": 0\n      },\n      \"endereco\": [\n        {\n          \"codUsuario\": [\n            \"5f55a5e825a0cfbdfa30b078\"\n          ],\n          \"_id\": \"5f55853275214ea4206e38ff\",\n          \"tipoEndereco\": \"residencial\",\n          \"cep\": 8887777,\n          \"uf\": \"SC\",\n          \"cidade\": \"Macieira\",\n          \"bairro\": \"Centro\",\n          \"endereco\": \"rua das laranjeiras\",\n          \"numero\": 100,\n          \"__v\": 0\n        },\n    ],\n      \"servicosOferecidos\": [\n        {\n          \"_id\": \"5f55a5e825a0cfbdfa30b07a\",\n          \"tipoAtendimento\": \"Presencial\",\n          \"aceitaPermuta\": false,\n          \"valor\": 60\n        },\n        {\n          \"_id\": \"5f55a5e825a0cfbdfa30b07b\",\n          \"tipoAtendimento\": \"Online\",\n          \"aceitaPermuta\": true,\n          \"valor\": 0\n        },\n        {\n          \"_id\": \"5f55a9a07e521cc12883dc53\",\n          \"tipoAtendimento\": \"Presencial\",\n          \"aceitaPermuta\": true,\n          \"valor\": 25\n        },\n        {\n          \"_id\": \"5f55ae083301e9c3aace36e2\"\n        }\n      ],\n      \"usuariosBloqueados\": [\n        {\n          \"_id\": \"5f55b9f5409e7ecbf4ecf98d\",\n          \"codUsuario\": [\n            \"5f55a5e825a0cfbdfa30b078\"\n          ],\n          \"nomeCompleto\": \"Maria Mercedes\",\n          \"dataBloqueio\": \"2020-09-07T04:41:25.627Z\"\n        }\n      ],\n      \"notificacoes\": [\n        {\n          \"codUsuario\": [\n            \"5f55a5e825a0cfbdfa30b078\"\n          ],\n          \"lido\": true,\n          \"_id\": \"5f55a5e825a0cfbdfa30b07c\",\n          \"descricao\": \"Bem-vindo ao MaryHelp!\",\n          \"__v\": 0\n        }\n      ],\n      \"avaliacoesFeitas\": [],\n      \"avaliacoesRecebidas\": [],\n      \"mensagens\": []\n   }\n]}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "fields": {
-        "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "optional": false,
-            "field": "error",
-            "description": ""
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Error-Response:",
-          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"UseNortFound\"\n}",
-          "type": "json"
-        }
-      ]
-    },
     "filename": "./src/App/Routes/CadastroRoute.ts",
     "groupTitle": "Usuário"
   },
@@ -3258,84 +3325,17 @@
     "groupTitle": "Usuário"
   },
   {
-    "type": "put",
-    "url": "usuario/:id",
-    "title": "Edita dados do usuario",
+    "type": "post",
+    "url": "novo-cadastro",
+    "title": "Cadastro de usuario",
     "version": "1.0.0",
-    "name": "editaUsuario",
+    "name": "criaUsuario",
     "group": "Usuário",
     "parameter": {
-      "fields": {
-        "parameters": [
-          {
-            "group": "parameters",
-            "type": "String",
-            "optional": false,
-            "field": "id",
-            "description": "<p>codigo do usuario</p>"
-          },
-          {
-            "group": "parameters",
-            "type": "String",
-            "optional": false,
-            "field": "nome",
-            "description": "<p>nome do usuario</p>"
-          },
-          {
-            "group": "parameters",
-            "type": "String",
-            "optional": false,
-            "field": "sobrenome",
-            "description": "<p>sobrenome do usuario</p>"
-          },
-          {
-            "group": "parameters",
-            "type": "Date",
-            "optional": false,
-            "field": "dataNascimento",
-            "description": "<p>cep</p>"
-          },
-          {
-            "group": "parameters",
-            "type": "String",
-            "optional": false,
-            "field": "usuario",
-            "description": "<p>usuario</p>"
-          },
-          {
-            "group": "parameters",
-            "type": "String",
-            "optional": false,
-            "field": "senha",
-            "description": "<p>senha do usuario</p>"
-          },
-          {
-            "group": "parameters",
-            "type": "Numeric",
-            "optional": false,
-            "field": "telefone",
-            "description": "<p>telefone do usuario</p>"
-          },
-          {
-            "group": "parameters",
-            "type": "String",
-            "optional": false,
-            "field": "email",
-            "description": "<p>email do usuario</p>"
-          },
-          {
-            "group": "parameters",
-            "type": "Boolean",
-            "optional": false,
-            "field": "temfilhos",
-            "description": "<p>se tem filhos</p>"
-          }
-        ]
-      },
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "{\n  \"nome\": \"Maria\",\n  \"sobrenome\": \"Mercedes\",\n  \"dataNascimento\": \"11/10/1990\",\n  \"usuario\": \"gabis\",\n  \"senha\": 4654654,\n  \"telefone\": \"88888888\",\n  \"email\": \"mariadobairro@email.com\",\n  \"temfilhos\": \"1\"\n}",
+          "content": "{\n\t\"cadastro\": {\n   \"nome\": \"Gabriela\",\n   \"sobrenome\": \"Silva\",\n   \"dataNascimento\": \"11/10/1990\",\n   \"usuario\": \"gabis\",\n   \"senha\": 1234,\n   \"telefone\": \"000000000\",\n   \"email\": \"gabi.s@email.com\",\n   \"temfilhos\": \"0\",\n   \"foto\" : \"/.../.../foto.png\"\n   },\n  \"endereco\": {\n      \"0\": {\n          \"tipoEndereco\": \"comercial\",\n          \"cep\": \"000000000\",\n          \"uf\": \"SC\",\n          \"cidade\": \"Cidade\",\n          \"bairro\": \"Centro\",\n          \"endereco\": \"rua das laranjeiras\",\n          \"numero\": \"20\"\n      }\n  },\n  \"servicosOferecidos\": {\n      \"0\": {\n          \"codServico\": \"5f556a38363c4a936c0fd74c\",\n          \"tipoAtendimento\": \"Presencial\",\n          \"aceitaPermuta\": \"0\",\n          \"valor\": \"60.00\"\n      },\n      \"1\": {\n          \"codServico\": \"5f556a40363c4a936c0fd74d\",\n          \"tipoAtendimento\": \"Online\",\n          \"aceitaPermuta\": \"1\",\n          \"valor\": \"00.00\"\n      }\n  }\n}",
           "type": "json"
         }
       ]
@@ -3347,7 +3347,7 @@
             "group": "200",
             "type": "String",
             "optional": false,
-            "field": "message",
+            "field": "data",
             "description": "<p>Ok</p>"
           }
         ]
@@ -3355,7 +3355,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n  \"result\": \"Usuario alterado com sucesso!\"\n}",
+          "content": "{\n  \"result\": [{\n      \"cadastro\": {\n        \"_id\": \"5f55a5e825a0cfbdfa30b078\",\n        \"nome\": \"Maria\",\n        \"sobrenome\": \"Mercedes\",\n        \"dataNascimento\": \"1990-11-10T02:00:00.000Z\",\n        \"usuario\": \"gabis\",\n        \"senha\": \"4654654\",\n        \"telefone\": 88888888,\n        \"email\": \"mariadobairro@email.com\",\n        \"dataRegistro\": \"2020-09-07T03:15:52.703Z\",\n        \"__v\": 0\n      },\n      \"endereco\": [\n        {\n          \"codUsuario\": [\n            \"5f55a5e825a0cfbdfa30b078\"\n          ],\n          \"_id\": \"5f55853275214ea4206e38ff\",\n          \"tipoEndereco\": \"residencial\",\n          \"cep\": 8887777,\n          \"uf\": \"SC\",\n          \"cidade\": \"Macieira\",\n          \"bairro\": \"Centro\",\n          \"endereco\": \"rua das laranjeiras\",\n          \"numero\": 100,\n          \"__v\": 0\n        },\n    ],\n      \"servicosOferecidos\": [\n        {\n          \"_id\": \"5f55a5e825a0cfbdfa30b07a\",\n          \"tipoAtendimento\": \"Presencial\",\n          \"aceitaPermuta\": false,\n          \"valor\": 60\n        },\n        {\n          \"_id\": \"5f55a5e825a0cfbdfa30b07b\",\n          \"tipoAtendimento\": \"Online\",\n          \"aceitaPermuta\": true,\n          \"valor\": 0\n        },\n        {\n          \"_id\": \"5f55a9a07e521cc12883dc53\",\n          \"tipoAtendimento\": \"Presencial\",\n          \"aceitaPermuta\": true,\n          \"valor\": 25\n        },\n        {\n          \"_id\": \"5f55ae083301e9c3aace36e2\"\n        }\n      ],\n      \"usuariosBloqueados\": [\n        {\n          \"_id\": \"5f55b9f5409e7ecbf4ecf98d\",\n          \"codUsuario\": [\n            \"5f55a5e825a0cfbdfa30b078\"\n          ],\n          \"nomeCompleto\": \"Maria Mercedes\",\n          \"dataBloqueio\": \"2020-09-07T04:41:25.627Z\"\n        }\n      ],\n      \"notificacoes\": [\n        {\n          \"codUsuario\": [\n            \"5f55a5e825a0cfbdfa30b078\"\n          ],\n          \"lido\": true,\n          \"_id\": \"5f55a5e825a0cfbdfa30b07c\",\n          \"descricao\": \"Bem-vindo ao MaryHelp!\",\n          \"__v\": 0\n        }\n      ],\n      \"avaliacoesFeitas\": [],\n      \"avaliacoesRecebidas\": [],\n      \"mensagens\": []\n   }\n]}",
           "type": "json"
         }
       ]
@@ -3379,7 +3379,7 @@
         }
       ]
     },
-    "filename": "./build/App/Routes/CadastroRoute.js",
+    "filename": "./src/App/Routes/CadastroRoute.ts",
     "groupTitle": "Usuário"
   },
   {
@@ -3505,6 +3505,131 @@
       ]
     },
     "filename": "./src/App/Routes/CadastroRoute.ts",
+    "groupTitle": "Usuário"
+  },
+  {
+    "type": "put",
+    "url": "usuario/:id",
+    "title": "Edita dados do usuario",
+    "version": "1.0.0",
+    "name": "editaUsuario",
+    "group": "Usuário",
+    "parameter": {
+      "fields": {
+        "parameters": [
+          {
+            "group": "parameters",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>codigo do usuario</p>"
+          },
+          {
+            "group": "parameters",
+            "type": "String",
+            "optional": false,
+            "field": "nome",
+            "description": "<p>nome do usuario</p>"
+          },
+          {
+            "group": "parameters",
+            "type": "String",
+            "optional": false,
+            "field": "sobrenome",
+            "description": "<p>sobrenome do usuario</p>"
+          },
+          {
+            "group": "parameters",
+            "type": "Date",
+            "optional": false,
+            "field": "dataNascimento",
+            "description": "<p>cep</p>"
+          },
+          {
+            "group": "parameters",
+            "type": "String",
+            "optional": false,
+            "field": "usuario",
+            "description": "<p>usuario</p>"
+          },
+          {
+            "group": "parameters",
+            "type": "String",
+            "optional": false,
+            "field": "senha",
+            "description": "<p>senha do usuario</p>"
+          },
+          {
+            "group": "parameters",
+            "type": "Numeric",
+            "optional": false,
+            "field": "telefone",
+            "description": "<p>telefone do usuario</p>"
+          },
+          {
+            "group": "parameters",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>email do usuario</p>"
+          },
+          {
+            "group": "parameters",
+            "type": "Boolean",
+            "optional": false,
+            "field": "temfilhos",
+            "description": "<p>se tem filhos</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"nome\": \"Maria\",\n  \"sobrenome\": \"Mercedes\",\n  \"dataNascimento\": \"11/10/1990\",\n  \"usuario\": \"gabis\",\n  \"senha\": 4654654,\n  \"telefone\": \"88888888\",\n  \"email\": \"mariadobairro@email.com\",\n  \"temfilhos\": \"1\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Ok</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n  \"result\": \"Usuario alterado com sucesso!\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "error",
+            "description": ""
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"UseNortFound\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./build/App/Routes/CadastroRoute.js",
     "groupTitle": "Usuário"
   }
 ]
