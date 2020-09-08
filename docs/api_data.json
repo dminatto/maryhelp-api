@@ -1,5 +1,33 @@
 [
   {
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "varname1",
+            "description": "<p>No type.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "varname2",
+            "description": "<p>With type.</p>"
+          }
+        ]
+      }
+    },
+    "type": "",
+    "url": "",
+    "version": "0.0.0",
+    "filename": "./apidoc/main.js",
+    "group": "/home/dani/repository/maryhelp/apidoc/main.js",
+    "groupTitle": "/home/dani/repository/maryhelp/apidoc/main.js",
+    "name": ""
+  },
+  {
     "type": "get",
     "url": "servico",
     "title": "Busca serviços",
@@ -888,9 +916,9 @@
     "groupTitle": "Usuario_-_Notificação"
   },
   {
-    "type": "post",
-    "url": "usuario/:id/servicos",
-    "title": "Inclui serviço para usuario",
+    "type": "put",
+    "url": "usuario/:idUsuario/servicos/:idServico",
+    "title": "Altera serviço para usuario",
     "version": "1.0.0",
     "name": "incluiServicoUsuario",
     "group": "Usuario_-_Serviço",
@@ -901,14 +929,14 @@
             "group": "parameters",
             "type": "String",
             "optional": false,
-            "field": "id",
-            "description": "<p>id do usuario</p>"
+            "field": "idUsuario",
+            "description": "<p>codigo do usuario</p>"
           },
           {
             "group": "parameters",
             "type": "String",
             "optional": false,
-            "field": "codServico",
+            "field": "idServico",
             "description": "<p>codigo do serviço</p>"
           },
           {
@@ -937,7 +965,7 @@
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "{\n  \"codServico\": \"5f555bb6628056885e50a2e7\",\n  \"tipoAtendimento\": \"Presencial\",\n  \"aceitaPermuta\": \"1\",\n  \"valor\": \"25.00\"\n}",
+          "content": "{\n  \"tipoAtendimento\": \"Presencial\",\n  \"aceitaPermuta\": \"1\",\n  \"valor\": \"25.00\"\n}",
           "type": "json"
         }
       ]
@@ -957,7 +985,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n  result\": \"Serviço incluso com sucesso!\n}",
+          "content": "{\n  result\": \"Serviço editado com sucesso!\n}",
           "type": "json"
         }
       ]
@@ -1054,9 +1082,9 @@
     "groupTitle": "Usuario_-_Serviço"
   },
   {
-    "type": "put",
-    "url": "usuario/:idUsuario/servicos/:idServico",
-    "title": "Altera serviço para usuario",
+    "type": "post",
+    "url": "usuario/:id/servicos",
+    "title": "Inclui serviço para usuario",
     "version": "1.0.0",
     "name": "incluiServicoUsuario",
     "group": "Usuario_-_Serviço",
@@ -1067,14 +1095,14 @@
             "group": "parameters",
             "type": "String",
             "optional": false,
-            "field": "idUsuario",
-            "description": "<p>codigo do usuario</p>"
+            "field": "id",
+            "description": "<p>id do usuario</p>"
           },
           {
             "group": "parameters",
             "type": "String",
             "optional": false,
-            "field": "idServico",
+            "field": "codServico",
             "description": "<p>codigo do serviço</p>"
           },
           {
@@ -1103,7 +1131,7 @@
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "{\n  \"tipoAtendimento\": \"Presencial\",\n  \"aceitaPermuta\": \"1\",\n  \"valor\": \"25.00\"\n}",
+          "content": "{\n  \"codServico\": \"5f555bb6628056885e50a2e7\",\n  \"tipoAtendimento\": \"Presencial\",\n  \"aceitaPermuta\": \"1\",\n  \"valor\": \"25.00\"\n}",
           "type": "json"
         }
       ]
@@ -1123,7 +1151,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n  result\": \"Serviço editado com sucesso!\n}",
+          "content": "{\n  result\": \"Serviço incluso com sucesso!\n}",
           "type": "json"
         }
       ]
