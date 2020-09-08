@@ -24,7 +24,7 @@ class SistemaRoute {
 
 
     listaRotas() { 
-        this.app.route('/').get((req, res) => res.status(200).json({ 'message': 'Para saber mais sobre os endpoints consulte: https://dminatto.github.io/maryhelp-api/doc/index.html' }));
+        this.app.route('/').get((req, res) => res.status(200).json({ 'message': 'Para saber mais sobre os endpoints consulte: https://dminatto.github.io/maryhelp-api/' }));
     }
 }
 
