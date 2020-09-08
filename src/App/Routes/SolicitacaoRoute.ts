@@ -254,7 +254,7 @@ class SolicitacaoRoute {
         * @apiParam (parameters) {String} codSolicitante codigo do usuario interessado
         * @apiParamExample {json} Request-Example:
         * {
-        *   "codSolicitacao" : "5f55a5e825a0cfbdfa30b078"
+        *   "codSolicitacao" : "5f55a5e825a0cfbdfa30b078",
         *   "codSolicitante" : "5f55a5e825a0cfbdfa30b078"
         * }
         * @apiSuccess (200) {String} message  Ok

@@ -71,7 +71,7 @@ class SolicitacoesController {
 
     async sinalizaInteresse(data) { 
 
-        await this.repository.criaInteresse(data).then(solicitacao => {
+        return await this.repository.criaInteresse(data).then(solicitacao => {
             //todo: enviar uma notificacao
             return "Interesse registrado com sucesso!"
         })

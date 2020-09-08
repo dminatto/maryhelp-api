@@ -2,7 +2,7 @@ import * as mongoose from "mongoose";
 
 const InteresseSchema = new mongoose.Schema({
     codSolicitacao: {type: String},
-    codSolicitante: {type: Boolean},
+    codSolicitante: {type: String},
     aprovacao: {type:Number, default: 0}
 });
 
