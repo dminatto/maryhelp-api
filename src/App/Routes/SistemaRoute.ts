@@ -3,6 +3,7 @@ import * as express from 'express';
 import cadastro from './CadastroRoute';
 import servico from './ServicoRoute';
 import solicitacao from './SolicitacaoRoute';
+import * as fs from 'fs';
 
 class SistemaRoute {
 
@@ -23,10 +24,7 @@ class SistemaRoute {
 
 
     listaRotas() { 
-
-        this.app.route('/').get((req, res) => res.status(200).json({ 'message': 'Hello world!' }));
-        
-
+        this.app.route('/').get((req, res) => res.status(200).json({ 'message': 'Para saber mais sobre os endpoints consulte: https://dminatto.github.io/maryhelp-api/doc/index.html' }));
     }
 }
 

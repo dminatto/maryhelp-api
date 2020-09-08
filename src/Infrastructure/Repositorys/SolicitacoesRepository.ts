@@ -1,6 +1,7 @@
 import modelSolicitacao from '../Models/Solicitacoes';
 import modelSolicitacaoAvaliacao from '../Models/SolicitacoesAvaliacoes';
 import modelServicosMensagem from '../Models/SolicitacoesMensagens';
+import modelInteresse from '../Models/Interesse';
 
 const SOLICITACAO_CANCELADA = 0;
 const SOLICITACAO_ABERTA = 1;
@@ -10,15 +11,21 @@ const SOLICITACAO_FINALIZADA = 3;
 class SolicitacoesRepository {
 
     buscaSolicitacoesSolicitante(idUsuario, statusSolicitacao) {
-        
-        return modelSolicitacao.find({ status:statusSolicitacao})
-                .where({codSolicitante: idUsuario});
+
+        return modelSolicitacao.find({ status: statusSolicitacao })
+            .where({ codSolicitante: idUsuario });
     }
 
     buscaSolicitacoesSolicitado(idUsuario, statusSolicitacao) {
 
-        return modelSolicitacao.find({ status:statusSolicitacao})
-                .where({codSolicitado: idUsuario});
+        return modelSolicitacao.find({ status: statusSolicitacao })
+            .where({ codSolicitado: idUsuario });
+    }
+
+    buscaSolicitacoesPorServico(idServico) {
+
+        return modelSolicitacao.find({ codServico: idServico })
+            .where({ status: SOLICITACAO_ABERTA });
     }
 
     buscaSolicitacoesEmAberto() {
@@ -69,6 +76,18 @@ class SolicitacoesRepository {
 
     buscaHistoricoDeMensagens(idSolicitacao) {
         return modelServicosMensagem.find({ idSolicitacao: idSolicitacao });
+    }
+
+    criaInteresse(dados){
+        return modelInteresse.create(dados);
+    }
+
+    async buscaInteresse(id){
+        return modelInteresse.findById(id);
+    }
+
+    match(idInteresse, aprovacao){
+        return modelInteresse.findById(idInteresse).update({aprovacao: aprovacao});
     }
 }
 

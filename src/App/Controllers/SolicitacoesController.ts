@@ -14,6 +14,12 @@ class SolicitacoesController {
             .catch(err => res.status(400).json({ 'result': err }));
     }
 
+    async buscaSolicitacoesPorServico(req, res) {
+        return await this.service.buscaTodasSolicitacoesPorTipoDeServico(req.params.idServico)
+            .then(solicitacao => res.status(200).json({ 'result': solicitacao }))
+            .catch(err => res.status(400).json({ 'result': err }));
+    }
+
     async buscaSolicitacoesEmAberto(req, res) {
         let solicitacoes = await this.service.buscaTodasSolicitacoesEmAberto(req.params.id);
         return res.status(200).json({ 'result': solicitacoes });
@@ -60,6 +66,25 @@ class SolicitacoesController {
         return await this.service.lerMensagem(req.params.idMensagem)
             .then(solicitacao => res.status(200).json({ 'result': "Mensagem lida!" }))
             .catch(err => res.status(400).json({ 'result': err }));
+    }
+
+
+    async sinalizaInteresse(req, res) { 
+
+        let interesse =  await this.service.sinalizaInteresse(req.body);
+        return res.status(200).json({ 'result': interesse });
+    }
+
+    async geraMatch(req, res) { 
+
+        let interesse = await this.service.geraMatch(req.params.id);
+        return res.status(200).json({ 'result': interesse });
+
+    }
+
+    async recusaMatch(req, res) { 
+        let interesse  = this.service.recusaMatch(req.params.id);
+        return res.status(200).json({ 'result': interesse });
     }
 }
 

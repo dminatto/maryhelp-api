@@ -246,7 +246,7 @@ class CadastroRoute {
         *     }
         */
         this.app.route('/usuario/:id').get((req, res) => Controller.buscaUsuario(req, res));
-        
+
         /**
         * @api {put} usuario/:id Edita dados do usuario
         * @apiVersion 1.0.0
@@ -510,6 +510,19 @@ class CadastroRoute {
         *     }
         */
         this.app.route('/privacidade').get((req, res) => Controller.privacidade(req, res));
+
+
+
+        this.app.get('/logout', function (req, res) {
+            res.status(200).send({ auth: false, token: null });
+        });
+
+        this.app.get('/logout', function (req, res) {
+            res.status(200).send({ auth: false, token: null });
+        });
+
+
+
     }
 }
 

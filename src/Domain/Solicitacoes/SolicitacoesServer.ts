@@ -8,6 +8,11 @@ const SOLICITACAO_ABERTA = 1;
 const SOLICITACAO_EM_ANDAMENTO = 2;
 const SOLICITACAO_FINALIZADA = 3;
 
+
+const INTERESSE_AGUARDANDO = 0;
+const INTERESSE_APROVADO = 1;
+const INTERESSE_REPROVADO = 2;
+
 class SolicitacoesController {
 
     private repository: solicitacoesRepository;
@@ -63,6 +68,33 @@ class SolicitacoesController {
             .catch(err => { return err });
     }
 
+
+    async sinalizaInteresse(data) { 
+
+        await this.repository.criaInteresse(data).then(solicitacao => {
+            //todo: enviar uma notificacao
+            return "Interesse registrado com sucesso!"
+        })
+        .catch(err => { return err });
+    }
+
+    async geraMatch(idInteresse) { 
+
+        await this.repository.match(idInteresse, INTERESSE_APROVADO);
+        let interesse = await this.repository.buscaInteresse(idInteresse)
+        .then(obj => {return obj})
+        .catch(err => {return err});
+
+        return await this.atribuiSolicitacao(interesse.codSolicitacao, {idSolicitado: interesse.codSolicitante});
+
+    }
+
+    async recusaMatch(idInteresse) { 
+        return  this.repository.match(idInteresse, INTERESSE_REPROVADO)
+        .then(obj => {return "Usuario recusado com sucesso!"})
+        .catch(err => {return err});
+    }
+
     async finalizaSolicitacao(idSolicitacao) {
 
         return await this.repository.finalizaSolicitacao(idSolicitacao)
@@ -90,19 +122,28 @@ class SolicitacoesController {
             .catch(err => { return err });
     }
 
-    async buscaSolicitacoesDoUsuario(idUsuario) {
+    async buscaTodasSolicitacoesEmAberto() {
 
+        let solicitacoes = await this.repository.buscaSolicitacoesEmAberto()
+            .then(solicitacao => { return solicitacao })
+            .catch(err => { return err });
 
+        var listaSolicitacoes = new Array;
 
-        return {
-            ativas: [],
-            emAndamento: [],
-            canceladas: [],
-            finalizadas: []
+        console.log(solicitacoes);
+
+        for (let key in solicitacoes) {
+            if (this.isEmpty(solicitacoes[key].codSolicitante) || this.isEmpty(solicitacoes[key].codServico)) {
+                continue;
+            }
+
+            listaSolicitacoes.push(await this.detalhaSolicitacao(solicitacoes[key]));
         }
+
+        return listaSolicitacoes;
     }
 
-    async buscaTodasSolicitacoesEmAberto() {
+    async buscaTodasSolicitacoesPorTipoDeServico() {
 
         let solicitacoes = await this.repository.buscaSolicitacoesEmAberto()
             .then(solicitacao => { return solicitacao })

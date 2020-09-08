@@ -1,5 +1,6 @@
 # MaryHelp - API
 
+[Documentação](https://dminatto.github.io/maryhelp-api/doc/index.html)
 
 ## Getting started
 
@@ -7,6 +8,7 @@
 - [NPM](https://www.npmjs.com/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [MongoDB](https://www.mongodb.com/)
+- [JWT]()
 
 ## Developing
 
