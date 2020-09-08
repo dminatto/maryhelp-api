@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var express = require("express");
 var dotenv = require("dotenv");
-var cors = require("cors");
 var bodyParser = require("body-parser");
 var SistemaRoute_1 = require("../Routes/SistemaRoute");
 var Connection_1 = require("../../Infrastructure/DataBase/Connection");
@@ -16,7 +15,7 @@ var App = /** @class */ (function () {
         this.routes.listaRotas();
     }
     App.prototype.middleware = function () {
-        this.app.use(cors());
+        // this.app.use(cors());
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({ extended: true }));
     };

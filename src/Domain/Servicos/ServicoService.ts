@@ -75,8 +75,6 @@ class ServicoService {
 
 
     async apagaServicoUsuario(codUsuarioServico) {
-
-        //validar depois se não está em nenhuma solicitacao
         return await this.repository.removeServicoDoUsuario(codUsuarioServico);
      }
 }

@@ -40,12 +40,31 @@ var UsuarioRepository_1 = require("../../Infrastructure/Repositorys/UsuarioRepos
 var NotificacoesService_1 = require("./NotificacoesService");
 var ServicoService_1 = require("../Servicos/ServicoService");
 var TermosUsoFactory_1 = require("../../Infrastructure/Factories/TermosUsoFactory");
+var Auth_1 = require("./Auth");
 var CadastroService = /** @class */ (function () {
     function CadastroService() {
         this.usuarioRepository = new UsuarioRepository_1.default();
         this.servicoService = new ServicoService_1.default();
         this.notificacaoService = new NotificacoesService_1.default();
     }
+    CadastroService.prototype.login = function (data) {
+        return __awaiter(this, void 0, void 0, function () {
+            var usuario, senha, dados;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        usuario = data.user;
+                        senha = data.pass;
+                        return [4 /*yield*/, this.usuarioRepository.autenticaUsuario(usuario, senha)
+                                .then(function (usuario) { return usuario; })
+                                .catch(function (err) { return err; })];
+                    case 1:
+                        dados = _a.sent();
+                        return [2 /*return*/, Auth_1.default.geraToken(dados.id)];
+                }
+            });
+        });
+    };
     CadastroService.prototype.buscaDadosDoCadastro = function (id) {
         return __awaiter(this, void 0, void 0, function () {
             var dadosCadastro, dadosEndereco, dadosServico, usuariosBloqueados, notificacao;
@@ -75,9 +94,7 @@ var CadastroService = /** @class */ (function () {
                                     endereco: dadosEndereco,
                                     servicosOferecidos: dadosServico,
                                     usuariosBloqueados: usuariosBloqueados,
-                                    notificacoes: notificacao,
-                                    avaliacoesFeitas: [],
-                                    avaliacoesRecebidas: []
+                                    notificacoes: notificacao
                                 }]];
                 }
             });
@@ -286,6 +303,30 @@ var CadastroService = /** @class */ (function () {
         });
     };
     CadastroService.prototype.removeBloqueioCadastro = function (idBloqueio) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.usuarioRepository.desbloqueiaUsuario(idBloqueio)
+                            .then(function (r) { return "Usuário desbloqueado com sucesso!"; })
+                            .catch(function (err) { return err; })];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    CadastroService.prototype.avaliacoesFeitas = function (idBloqueio) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.usuarioRepository.desbloqueiaUsuario(idBloqueio)
+                            .then(function (r) { return "Usuário desbloqueado com sucesso!"; })
+                            .catch(function (err) { return err; })];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    CadastroService.prototype.avaliacoesRecebidas = function (idBloqueio) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {

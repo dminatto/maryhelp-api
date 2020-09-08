@@ -148,9 +148,7 @@ var ServicoService = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.repository.removeServicoDoUsuario(codUsuarioServico)];
-                    case 1: 
-                    //validar depois se não está em nenhuma solicitacao
-                    return [2 /*return*/, _a.sent()];
+                    case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         });

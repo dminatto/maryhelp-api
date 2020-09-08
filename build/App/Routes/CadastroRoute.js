@@ -398,7 +398,7 @@ var CadastroRoute = /** @class */ (function () {
         *       "error": "UseNortFound"
         *     }
         */
-        this.app.route('/usuario/:id/endereco/:enderecoId').delete(function (req, res) { return UsuarioController_1.default.excluiEndereco(req, res); }); //testar depois
+        this.app.route('/usuario/:id/endereco/:enderecoId').delete(function (req, res) { return UsuarioController_1.default.excluiEndereco(req, res); });
         /**
         * @api {put} usuario/:id/notificacoes/:notificacaoId' Marca notificação como lida
         * @apiVersion 1.0.0
@@ -463,7 +463,7 @@ var CadastroRoute = /** @class */ (function () {
         *       "error": "UseNortFound"
         *     }
         */
-        this.app.route('/usuario/:id/block/:blockid').delete(function (req, res) { return UsuarioController_1.default.deletaBloqueio(req, res); }); //testar depois
+        this.app.route('/usuario/:id/block/:blockid').delete(function (req, res) { return UsuarioController_1.default.deletaBloqueio(req, res); });
         /**
         * @api {get} privacidade Retorna o código de privacidade e termos de uso
         * @apiVersion 1.0.0
@@ -519,7 +519,7 @@ var CadastroRoute = /** @class */ (function () {
         *     }
         */
         this.app.get('/login', function (req, res) {
-            res.status(200).send({ auth: false, token: null });
+            res.status(200).send(UsuarioController_1.default.login(req, res));
         });
         /**
         * @api {get} logout

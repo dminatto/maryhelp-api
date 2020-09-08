@@ -1,7 +1,6 @@
 import solicitacoesRepository from '../../Infrastructure/Repositorys/SolicitacoesRepository';
 import usuarioService from '../Cadastro/CadastroService';
 import servicoService from '../Servicos/ServicoService';
-import { count } from 'console';
 
 const SOLICITACAO_CANCELADA = 0;
 const SOLICITACAO_ABERTA = 1;
@@ -40,8 +39,6 @@ class SolicitacoesController {
 
     async editaSolicitacao(idUsuario, idSolicitacao, dados) {
 
-        //todo: tratar se a solicitacao está aberta e não tem solicitante
-
         let request = {
             codSolicitante: idUsuario,
             codServico: dados.codServico,
@@ -62,7 +59,6 @@ class SolicitacoesController {
 
         return await this.repository.editaSolicitacao(idSolicitacao, request)
             .then(solicitacao => {
-                //todo: enviar uma notificacao
                 return "Solicitacao atribuida com sucesso!"
             })
             .catch(err => { return err });
@@ -72,7 +68,6 @@ class SolicitacoesController {
     async sinalizaInteresse(data) { 
 
         return await this.repository.criaInteresse(data).then(solicitacao => {
-            //todo: enviar uma notificacao
             return "Interesse registrado com sucesso!"
         })
         .catch(err => { return err });
@@ -99,7 +94,6 @@ class SolicitacoesController {
 
         return await this.repository.finalizaSolicitacao(idSolicitacao)
             .then(solicitacao => {
-                //todo: enviar uma notificacao
                 return "Solicitacao finalizada com sucesso!"
             })
             .catch(err => { return err });
@@ -113,7 +107,6 @@ class SolicitacoesController {
 
         return await this.repository.editaSolicitacao(idSolicitacao, request)
             .then(solicitacao => {
-                //todo: enviar uma notificacao
                 return "Solicitacao cancelada com sucesso!"
             })
             .catch(err => { return err });
@@ -182,14 +175,6 @@ class SolicitacoesController {
             dataSolicitacao: solicitacao.dataSolicitacao
         };
     }
-
-    async buscaAvaliacoesSolicitacoesFeitas(idUsuario) { 
-
-    }
-
-    async buscaAvaliacoesSolicitacoesRecebidas(idUsuario) {
-        
-     }
 
     async enviarMensagen(idUsuario, idSolicitacao, dados) {
 

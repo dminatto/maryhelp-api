@@ -1,4 +1,4 @@
-{
+define({
   "name": "MaryHelp",
   "version": "1.0.0",
   "description": "Lista endpoints da API",
@@ -9,8 +9,8 @@
   "apidoc": "0.3.0",
   "generator": {
     "name": "apidoc",
-    "time": "2020-09-08T01:42:27.228Z",
+    "time": "2020-09-08T02:43:14.216Z",
     "url": "https://apidocjs.com",
     "version": "0.25.0"
   }
-}
+});

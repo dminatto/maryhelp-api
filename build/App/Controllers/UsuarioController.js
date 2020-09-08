@@ -58,8 +58,14 @@ var UsuarioController = /** @class */ (function () {
     };
     UsuarioController.prototype.login = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
+            var cadastro;
             return __generator(this, function (_a) {
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.service.login(req.req.body)];
+                    case 1:
+                        cadastro = _a.sent();
+                        return [2 /*return*/, res.status(200).json({ 'result': cadastro })];
+                }
             });
         });
     };

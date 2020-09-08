@@ -52,6 +52,13 @@ var UsuarioRepository = /** @class */ (function () {
     UsuarioRepository.prototype.criaUsuario = function (dados) {
         return Usuario_1.default.create(dados);
     };
+    UsuarioRepository.prototype.autenticaUsuario = function (user, password) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, Usuario_1.default.find({ usuario: user, senha: password })];
+            });
+        });
+    };
     UsuarioRepository.prototype.atualizaUsuario = function (id, dados) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {

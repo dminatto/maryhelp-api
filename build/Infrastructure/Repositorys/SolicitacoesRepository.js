@@ -84,10 +84,10 @@ var SolicitacoesRepository = /** @class */ (function () {
     };
     ;
     SolicitacoesRepository.prototype.buscaAvaliacoesRecebidas = function (idUsuario) {
-        //  return modelSolicitacaoAvaliacao.find({});
+        //return modelSolicitacaoAvaliacao.find({});
     };
     SolicitacoesRepository.prototype.buscaAvaliacoesGeradas = function (idUsuario) {
-        // return modelSolicitacaoAvaliacao.find();
+        return SolicitacoesAvaliacoes_1.default.find({ codUsuario: idUsuario });
     };
     SolicitacoesRepository.prototype.enviaMensagem = function (dados) {
         return SolicitacoesMensagens_1.default.create(dados);

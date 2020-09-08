@@ -103,7 +103,6 @@ var SolicitacoesController = /** @class */ (function () {
                         };
                         return [4 /*yield*/, this.repository.editaSolicitacao(idSolicitacao, request)
                                 .then(function (solicitacao) {
-                                //todo: enviar uma notificacao
                                 return "Solicitacao atribuida com sucesso!";
                             })
                                 .catch(function (err) { return err; })];
@@ -117,7 +116,6 @@ var SolicitacoesController = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.repository.criaInteresse(data).then(function (solicitacao) {
-                            //todo: enviar uma notificacao
                             return "Interesse registrado com sucesso!";
                         })
                             .catch(function (err) { return err; })];
@@ -160,7 +158,6 @@ var SolicitacoesController = /** @class */ (function () {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.repository.finalizaSolicitacao(idSolicitacao)
                             .then(function (solicitacao) {
-                            //todo: enviar uma notificacao
                             return "Solicitacao finalizada com sucesso!";
                         })
                             .catch(function (err) { return err; })];
@@ -181,7 +178,6 @@ var SolicitacoesController = /** @class */ (function () {
                         };
                         return [4 /*yield*/, this.repository.editaSolicitacao(idSolicitacao, request)
                                 .then(function (solicitacao) {
-                                //todo: enviar uma notificacao
                                 return "Solicitacao cancelada com sucesso!";
                             })
                                 .catch(function (err) { return err; })];
@@ -291,16 +287,6 @@ var SolicitacoesController = /** @class */ (function () {
             });
         });
     };
-    SolicitacoesController.prototype.buscaAvaliacoesSolicitacoesFeitas = function (idUsuario) {
-        return __awaiter(this, void 0, void 0, function () { return __generator(this, function (_a) {
-            return [2 /*return*/];
-        }); });
-    };
-    SolicitacoesController.prototype.buscaAvaliacoesSolicitacoesRecebidas = function (idUsuario) {
-        return __awaiter(this, void 0, void 0, function () { return __generator(this, function (_a) {
-            return [2 /*return*/];
-        }); });
-    };
     SolicitacoesController.prototype.enviarMensagen = function (idUsuario, idSolicitacao, dados) {
         return __awaiter(this, void 0, void 0, function () {
             var request;
@@ -341,13 +327,6 @@ var SolicitacoesController = /** @class */ (function () {
                             .catch(function (err) { return err; })];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
-            });
-        });
-    };
-    SolicitacoesController.prototype.historicoDeMensagen = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                return [2 /*return*/];
             });
         });
     };

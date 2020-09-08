@@ -161,7 +161,7 @@ var ServicoRoute = /** @class */ (function () {
         *       "error": "UseNortFound"
         *     }
         */
-        this.app.route('/usuario/:id/servicos/:servicoId').delete(function (req, res) { return ServicosController_1.default.excluiServicoUsuario(req, res); }); //testar depois
+        this.app.route('/usuario/:id/servicos/:servicoId').delete(function (req, res) { return ServicosController_1.default.excluiServicoUsuario(req, res); });
     };
     return ServicoRoute;
 }());

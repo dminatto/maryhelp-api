@@ -11,16 +11,16 @@ var Auth = /** @class */ (function () {
         });
         return { auth: true, token: token };
     };
-    Auth.prototype.verifyJWT = function (token) {
+    Auth.prototype.verificaJWT = function (token) {
         //var token = req.headers['x-access-token'];
         if (!token)
-            return { auth: false, message: 'No token provided.' };
+            return { auth: false, message: 'Usuário sem token.' };
         jsonwebtoken_1.default.verify(token, process.env.SECRET, function (err, decoded) {
             if (err)
-                return { auth: false, message: 'Failed to authenticate token.' };
+                return { auth: false, message: 'Falha na autenticação do token.' };
             return { auth: true, usuario: decoded.id };
         });
     };
     return Auth;
 }());
-exports.default = Auth;
+exports.default = new Auth();
