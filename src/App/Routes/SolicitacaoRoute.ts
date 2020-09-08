@@ -221,7 +221,7 @@ class SolicitacaoRoute {
         this.app.route('/solicitacao/:id/chat').post((req, res) => Controller.enviaMensagem(req, res));
 
         /**
-        * @api {get}solicitacao/:id/chat/:idMensagem/visualizar Marca mensagem como lida
+        * @api {get} solicitacao/:id/chat/:idMensagem/visualizar Marca mensagem como lida
         * @apiVersion 1.0.0
         * @apiName marcaMensagemComoLida
         * @apiGroup Usuario - Notificação
@@ -314,30 +314,6 @@ class SolicitacaoRoute {
         */
 
         this.app.route('/interesse/:id/recusa').get((req, res) => Controller.recusaMatch(req, res));
-
-
-        /*
-        rota monta-feed
-
-
-        /p/ escolher
-demonstra-interesse
-
-lista solicitacoes da pessoa
-tabela de interesse e detalha usuario
-
-        
-        p/ solicitacoes 
-        monta feed
-        id usuario
-        servicos do usuario
-        select * from solicitacoes em aberto
-        
-        rota demonstra-interesse
-        registra o interesse
-
-
-        */
     }
 }
 

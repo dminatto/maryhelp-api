@@ -118,7 +118,7 @@ class ServicoRoute {
         this.app.route('/usuario/:id/servicos').post((req, res) => Controller.incluiServicoUsuario(req, res));
 
         /**
-        * @api {put} usuario/:idUsuario/servicos/:idServico Inclui serviço para usuario
+        * @api {put} usuario/:idUsuario/servicos/:idServico Altera serviço para usuario
         * @apiVersion 1.0.0
         * @apiName incluiServicoUsuario
         * @apiGroup Usuario - Serviço
@@ -152,7 +152,7 @@ class ServicoRoute {
 
 
         /**
-        * @api {delete} usuario/:idUsuario/servicos/:idServico Inclui serviço para usuario
+        * @api {delete} usuario/:idUsuario/servicos/:idServico Exclui serviço para usuario
         * @apiVersion 1.0.0
         * @apiName incluiServicoUsuario
         * @apiGroup Usuario - Serviço
